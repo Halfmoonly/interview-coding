@@ -39,6 +39,8 @@ public class Solution5_MaxWaterArea {
             int innerArae = Math.min(height[left],height[right])*(right-left);
             answer = Math.max(answer,innerArae);
 
+            //直觉告诉我们，移动高度较小的指针
+            //因为移动指针的后果是，1.区域宽度必定减小，2.移动高度较小的指针有可能遇到更高的高度，整体的结果才有可能增大
             if (height[left]<=height[right]){
                 left++;
             }else{
