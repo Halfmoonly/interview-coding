@@ -3,7 +3,6 @@ package org.lyflexi.solutions;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  * @Author: ly
@@ -23,7 +22,7 @@ import java.util.Set;
 示例 2：
 输入：nums = [0,3,7,2,5,8,4,6,0,1]
 输出：9*/
-public class Solution3_LongestConsecutive {
+public class Solution03_LongestConsecutive {
 //    2024.1.10
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

@@ -37,7 +37,7 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 解释：唯一可能的三元组和为 0 。
 
 * */
-public class Solution6_ThreeSum {
+public class Solution06_ThreeSum {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 

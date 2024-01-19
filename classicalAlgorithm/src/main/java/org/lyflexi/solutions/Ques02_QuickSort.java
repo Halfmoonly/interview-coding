@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @Author: ly
  * @Date: 2024/1/11 16:50
  */
-public class Solution1_QuickSort {
+public class Ques02_QuickSort {
 
 //    2024.1.11题解
     public static void main(String[] args) {

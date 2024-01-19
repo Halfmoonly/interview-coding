@@ -1,8 +1,5 @@
 package org.lyflexi.solutions;
 
-import sun.security.provider.HashDrbg;
-
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -32,7 +29,7 @@ import java.util.HashMap;
 *
 *
 * */
-public class Soultion8_LongestSubstring {
+public class Solution08_LongestSubstring {
     public static int lengthOfLongestSubstring(String s) {
         int answer = 0;
         if (s==null) return 0;

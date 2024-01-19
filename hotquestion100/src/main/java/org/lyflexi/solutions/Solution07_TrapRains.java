@@ -22,7 +22,7 @@ import java.util.Scanner;
 输出：9
 *
 * */
-public class Soultion7_TrapRains {
+public class Solution07_TrapRains {
     public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     int[] array = Arrays.stream(scanner.nextLine().split(",")).mapToInt(Integer::parseInt).toArray();

@@ -23,7 +23,7 @@ import java.util.Scanner;
  * @Author: ly
  * @Date: 2024/1/13 11:36
  */
-public class Solution5_MaxWaterArea {
+public class Solution05_MaxWaterArea {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int[] array = Arrays.stream(scanner.nextLine().split(",")).mapToInt(Integer::parseInt).toArray();

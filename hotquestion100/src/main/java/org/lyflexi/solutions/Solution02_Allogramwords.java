@@ -25,7 +25,7 @@ import java.util.*;
 输入: strs = ["a"]
 输出: [["a"]]*/
 
-public class Solution2_Allogramwords {
+public class Solution02_Allogramwords {
     //2024.1.9题解
     public static void main(String[] args) {
 

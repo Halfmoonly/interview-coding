@@ -2,7 +2,6 @@ package org.lyflexi.solutions;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -25,7 +24,7 @@ import java.util.Scanner;
 输入：nums = [3,3], target = 6
 输出：[0,1]
 */
-public class Solution1_TwoNumsSum {
+public class Solution01_TwoNumsSum {
     /*2024.1.8日题解*/
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

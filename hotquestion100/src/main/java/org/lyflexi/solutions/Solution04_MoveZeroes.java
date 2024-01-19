@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @Date: 2024/1/11 10:23
  */
 
-public class Solution4_MoveZeroes {
+public class Solution04_MoveZeroes {
 //    2024.1.11
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
