@@ -30,7 +30,7 @@ import java.util.Scanner;
 所以中间和为k的这j个数根本不用算！！！
 
 在每次求完当前位置前缀和的时候，都判断一下之前有没有前缀和等于当前前缀和减掉k，就能确定有没有一段夹在中间的子数组和为k，从而解决你的问题*/
-public class Solution10_PreSum {
+public class Solution10_SumK {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

@@ -45,12 +45,14 @@ public class Ques01_Windows {
         return;
     }
 
-    /*滑动窗口，那就是数组+for循环*/
+    /*滑动窗口，那就是数组+for循环
+    * 增加条件，窗口中元素不重复*/
     private static int maxWindows(int[] nums, int k) {
         int rst=0,sum=0,n=nums.length;
         HashMap<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i <k; i++) {
             sum +=nums[i];
+            //getOrDefault用于初始化Map
             map.put(nums[i],map.getOrDefault(nums[i],0)+1);
         }
 
@@ -97,7 +99,7 @@ public class Ques01_Windows {
 
 
     /*官方题解：并且要求窗口中元素不重复****************************************************/
-    public static long maximumSubarraySum(int[] nums, int k) {
+/*    public static long maximumSubarraySum(int[] nums, int k) {
         int n = nums.length;
         long rst = 0, sum = 0;
         Map<Integer, Integer> map = new HashMap();
@@ -129,5 +131,5 @@ public class Ques01_Windows {
         }
 
         return rst;
-    }
+    }*/
 }
