@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.lyflexi</groupId>
-  <artifactId>hotinterview150</artifactId>
+  <artifactId>leetcode150</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>classicinterview150</name>
+  <name>leetcode150</name>
   <url>http://maven.apache.org</url>
 
   <properties>
