@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.lyflexi</groupId>
-  <artifactId>leetcodeQuestionBank</artifactId>
+  <artifactId>leetcodeProblemSet</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>leetcodeQuestionBank</name>
+  <name>leetcodeProblemSet</name>
   <url>http://maven.apache.org</url>
 
   <properties>
