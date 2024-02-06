@@ -41,6 +41,32 @@ public class Solution05_Thief {
         System.out.println(rob(array));
 
     }
+//    public static int rob(int[] nums) {
+//
+//        int n = nums.length;
+//
+//        if (n==0){
+//            return 0;
+//        }
+//        if (n==1){
+//            return nums[0];
+//        }
+//
+//        if (n==2){
+//            return Math.max(nums[0],nums[1]);
+//        }
+//
+//        int x = nums[0],y=Math.max(nums[0],nums[1]),z=0;
+//        //不要求爬出楼梯,大部分都是这种情况
+//        for (int i = 0; i < n-2; i++) {
+//            z=Math.max(x+nums[i+2],y);
+//            x = y;
+//            y=z;
+//        }
+//
+//        return z;
+//    }
+/*初始化一维的dp数组，可以保存所有的dp情况,最后只返回dp最后一个元素即可*/
     public static int rob(int[] nums) {
 
         int n = nums.length;
@@ -56,14 +82,19 @@ public class Solution05_Thief {
             return Math.max(nums[0],nums[1]);
         }
 
-        int x = nums[0],y=Math.max(nums[0],nums[1]),z=0;
+
+
+        int[] dp = new int[n];
+        dp[0]=nums[0];
+        dp[1]=Math.max(nums[0],nums[1]);
+
         //不要求爬出楼梯,大部分都是这种情况
         for (int i = 0; i < n-2; i++) {
-            z=Math.max(x+nums[i+2],y);
-            x = y;
-            y=z;
+
+            dp[i+2] = Math.max(dp[i]+nums[i+2], dp[i+1]);
+
         }
 
-        return z;
+        return dp[n-1];
     }
 }
