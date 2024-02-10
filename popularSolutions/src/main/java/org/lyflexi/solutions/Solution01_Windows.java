@@ -2,7 +2,6 @@ package org.lyflexi.solutions;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 /*滑动窗口：阿里巴巴找黄金宝箱(V)：滑动窗口
@@ -35,7 +34,7 @@ import java.util.Scanner;
 *
 * */
 
-public class Ques01_Windows {
+public class Solution01_Windows {
 
     public static void main(String[] args){
         Scanner in = new Scanner(System.in);

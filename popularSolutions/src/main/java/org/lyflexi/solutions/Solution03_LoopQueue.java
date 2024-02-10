@@ -15,14 +15,14 @@ import java.util.Scanner;
 * */
 
 
-public class Ques03_LoopQueue {
+public class Solution03_LoopQueue {
         private int front;
         //rear指针是一定时时刻刻指向最后一个元素的下一个位置的,这是一定的，是客观存在的
         private int rear;
         private int capacity;
         private int[] elements;
 
-        public Ques03_LoopQueue(int k) {
+        public Solution03_LoopQueue(int k) {
             //队列判空的条件是front==tail
             //因为rear指针是一定时时刻刻指向最后一个元素的下一个位置的，所以队列判满的条件也是front==tail无法区分.
 
@@ -87,7 +87,7 @@ public class Ques03_LoopQueue {
         Integer item5 = Integer.parseInt(scanner.nextLine());
 
 
-        Ques03_LoopQueue ques03LoopQueue = new Ques03_LoopQueue(k);
+        Solution03_LoopQueue ques03LoopQueue = new Solution03_LoopQueue(k);
         System.out.println(ques03LoopQueue.enQueue(item1));
         System.out.println(ques03LoopQueue.enQueue(item2));
         System.out.println(ques03LoopQueue.enQueue(item3));

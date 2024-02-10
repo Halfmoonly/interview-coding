@@ -20,7 +20,7 @@ import java.util.Scanner;
 输入: nums = [-1,0,3,5,9,12], target = 2
 输出: -1
 解释: 2 不存在 nums 中因此返回 -1*/
-public class Ques05_BinarySearch {
+public class Solution05_BinarySearch {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

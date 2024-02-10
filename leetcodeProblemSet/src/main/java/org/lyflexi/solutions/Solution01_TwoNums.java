@@ -3,6 +3,7 @@ package org.lyflexi.solutions;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * @Author: ly
@@ -40,9 +41,7 @@ public class Solution01_TwoNums {
             System.out.println(ints[i]);
         }
 
-
     }
-
 
 
     public static int[] twoSum(int[] nums, int target) {
