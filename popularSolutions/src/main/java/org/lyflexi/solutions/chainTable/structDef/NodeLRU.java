@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.linkedList.structDef;
+package org.lyflexi.solutions.chainTable.structDef;
 
 /**
  * @Author: ly

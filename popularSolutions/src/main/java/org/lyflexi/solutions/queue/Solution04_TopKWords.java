@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.heap;
+package org.lyflexi.solutions.queue;
 
 import java.util.*;
 
@@ -22,7 +22,7 @@ import java.util.*;
 输出: ["the", "is", "sunny", "day"]
 解析: "the", "is", "sunny" 和 "day" 是出现次数最多的四个单词，
     出现次数依次为 4, 3, 2 和 1 次。*/
-public class Solution02_TopKWords {
+public class Solution04_TopKWords {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 

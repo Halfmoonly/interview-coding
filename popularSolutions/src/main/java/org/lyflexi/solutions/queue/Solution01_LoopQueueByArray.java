@@ -11,19 +11,19 @@ import java.util.Scanner;
 /*
 使用数组去实现循环队列
 循环队列的一个好处是我们可以利用这个队列之前用过的空间。
-在一个普通队列里，一旦一个队列满了，我们就不能插入下一个元素，即使在队列前面仍有空间。但是使用循环队列，我们能使用这些空间去存储新的值。
+在一个普通队列里，一旦一个队列满了我们就不能插入下一个元素，即使在队列前面仍有空间。但是使用循环队列，我们能使用这些空间去存储新的值。
 * */
 
 
-public class Solution01_LoopQueue {
+public class Solution01_LoopQueueByArray {
         private int front;
         //rear指针是一定时时刻刻指向最后一个元素的下一个位置的,这是一定的，是客观存在的
         private int rear;
         private int capacity;
-        private int[] elements;
+        private int[] elements;//循环队列内部维护的数组，尺寸会比初始化容量多1
 
-        public Solution01_LoopQueue(int k) {
-            //队列判空的条件是front==tail
+        public Solution01_LoopQueueByArray(int k) {
+            //队列判空的条件是front==rear
             //因为rear指针是一定时时刻刻指向最后一个元素的下一个位置的，所以队列判满的条件也是front==tail无法区分.
 
 
@@ -87,7 +87,7 @@ public class Solution01_LoopQueue {
         Integer item5 = Integer.parseInt(scanner.nextLine());
 
 
-        Solution01_LoopQueue ques03LoopQueue = new Solution01_LoopQueue(k);
+        Solution01_LoopQueueByArray ques03LoopQueue = new Solution01_LoopQueueByArray(k);
         System.out.println(ques03LoopQueue.enQueue(item1));
         System.out.println(ques03LoopQueue.enQueue(item2));
         System.out.println(ques03LoopQueue.enQueue(item3));

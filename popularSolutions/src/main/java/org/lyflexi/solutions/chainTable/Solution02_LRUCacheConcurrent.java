@@ -1,6 +1,6 @@
-package org.lyflexi.solutions.linkedList;
+package org.lyflexi.solutions.chainTable;
 
-import org.lyflexi.solutions.linkedList.structDef.NodeLRU;
+import org.lyflexi.solutions.chainTable.structDef.NodeLRU;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;

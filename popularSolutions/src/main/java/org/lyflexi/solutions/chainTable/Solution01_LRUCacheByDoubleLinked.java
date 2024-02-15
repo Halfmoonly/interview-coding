@@ -1,7 +1,7 @@
-package org.lyflexi.solutions.linkedList;
+package org.lyflexi.solutions.chainTable;
 
 
-import org.lyflexi.solutions.linkedList.structDef.NodeLRU;
+import org.lyflexi.solutions.chainTable.structDef.NodeLRU;
 
 import java.util.HashMap;
 
@@ -47,12 +47,12 @@ lRUCache.get(1);    // 返回 -1 (未找到)
 lRUCache.get(3);    // 返回 3
 lRUCache.get(4);    // 返回 4
 * */
-public class Solution01_LRUCache {
+public class Solution01_LRUCacheByDoubleLinked {
 
 
     public static void main(String[] args) {
 
-        Solution01_LRUCache solution06LruCache = new Solution01_LRUCache(3);
+        Solution01_LRUCacheByDoubleLinked solution06LruCache = new Solution01_LRUCacheByDoubleLinked(3);
         solution06LruCache.put(1,1);
         solution06LruCache.put(2,2);
         solution06LruCache.put(3,3);
@@ -77,7 +77,7 @@ public class Solution01_LRUCache {
     HashMap<Integer,NodeLRU> mapToNode = new HashMap<>();
 
 
-    public Solution01_LRUCache(int capacity) {
+    public Solution01_LRUCacheByDoubleLinked(int capacity) {
         dummy = new NodeLRU(0, 0);
         dummy.next = dummy;//初始化傀儡节点的后继指向自身
         dummy.pre = dummy;//初始化傀儡节点的前驱指向自身
@@ -139,7 +139,7 @@ public class Solution01_LRUCache {
         dummy.pre.next = node;
         dummy.pre = node;
     }
-
+//由于是先进先出，所以出队相当于删除头节点
     private void delHead() {
         dummy.next.next.pre = dummy;
         dummy.next = dummy.next.next;

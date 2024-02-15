@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.heap;
+package org.lyflexi.solutions.queue;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 示例 2:
 输入: nums = [1], k = 1
 输出: [1]*/
-public class Solution01_TopK {
+public class Solution03_TopKByPriorityQueue {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
