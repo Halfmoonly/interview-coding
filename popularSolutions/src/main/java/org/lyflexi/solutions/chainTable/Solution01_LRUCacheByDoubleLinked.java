@@ -1,7 +1,7 @@
 package org.lyflexi.solutions.chainTable;
 
 
-import org.lyflexi.solutions.chainTable.structDef.NodeLRU;
+import org.lyflexi.solutions.chainTable.structDef.DListNode;
 
 import java.util.HashMap;
 
@@ -71,14 +71,15 @@ public class Solution01_LRUCacheByDoubleLinked {
 
     }
 
-    private NodeLRU dummy;
+    private DListNode dummy;
     private int capacity;
     private int count;
-    HashMap<Integer,NodeLRU> mapToNode = new HashMap<>();
+    HashMap<Integer, DListNode> mapToNode = new HashMap<>();
 
 
     public Solution01_LRUCacheByDoubleLinked(int capacity) {
-        dummy = new NodeLRU(0, 0);
+        //傀儡节点用于统一操作，将对head节点的操作统一进来
+        dummy = new DListNode(0, 0);
         dummy.next = dummy;//初始化傀儡节点的后继指向自身
         dummy.pre = dummy;//初始化傀儡节点的前驱指向自身
         this.capacity = capacity;
@@ -86,7 +87,7 @@ public class Solution01_LRUCacheByDoubleLinked {
 
     public int get(int key) {
 
-        NodeLRU cache = mapToNode.get(key);
+        DListNode cache = mapToNode.get(key);
         if (cache!=null){
             moveToTail(cache);
             return cache.getValue();
@@ -96,7 +97,7 @@ public class Solution01_LRUCacheByDoubleLinked {
     }
 
     public void put(int key, int value) {
-        NodeLRU cache = mapToNode.get(key);
+        DListNode cache = mapToNode.get(key);
         if (cache!=null){
             cache.setValue(value);
             mapToNode.put(key,cache);
@@ -112,7 +113,7 @@ public class Solution01_LRUCacheByDoubleLinked {
             count--;
         }
 
-        NodeLRU node = new NodeLRU(key, value);
+        DListNode node = new DListNode(key, value);
         addToTail(node);
         mapToNode.put(key,node);
     }
@@ -120,7 +121,7 @@ public class Solution01_LRUCacheByDoubleLinked {
 
 
 
-    private void moveToTail(NodeLRU node) {
+    private void moveToTail(DListNode node) {
 
         //删除当前节点
         node.pre.next = node.next;
@@ -131,7 +132,7 @@ public class Solution01_LRUCacheByDoubleLinked {
         addToTail(node);
 
     }
-    private void addToTail(NodeLRU node) {
+    private void addToTail(DListNode node) {
         //先安置新节点自身的前驱与后继指针
         node.next = dummy;
         node.pre = dummy.pre;

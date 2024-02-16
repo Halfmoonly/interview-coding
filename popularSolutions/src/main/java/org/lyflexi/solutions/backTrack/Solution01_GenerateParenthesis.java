@@ -38,7 +38,7 @@ public class Solution01_GenerateParenthesis {
 
 
     public static List<String> generateParenthesis(int n) {
-        StringBuilder sb = new StringBuilder();//StringBuilder的拼接效率会更高
+        StringBuilder sb = new StringBuilder();//回溯发动机""空字符串，StringBuilder的拼接效率会更高
         ArrayList<String> answer = new ArrayList<>();
         backTrace(0,0,sb,n,answer);
         return answer;
@@ -54,6 +54,7 @@ public class Solution01_GenerateParenthesis {
         }
 
 
+        //下面是进行选择的两个限制条件
 
 //        1.放置左括号,当左括号数量小于最大值
         if (open<maxPairs) {

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 示例 2:
 输入: nums = [1], k = 1
 输出: [1]*/
-public class Solution03_TopKByPriorityQueue {
+public class Solution03_TopKByHeap {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);

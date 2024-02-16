@@ -16,7 +16,7 @@ LCR 175. 计算二叉树的深度
 *
 *
 * */
-public class Solution05_TreeDepthByLinkedList {
+public class Solution05_TreeDepth {
 
 
     public int calculateDepth(TreeNode root) {
@@ -24,8 +24,8 @@ public class Solution05_TreeDepthByLinkedList {
         if (root==null){
             return 0;
         }
-
-        LinkedList<TreeNode> queue = new LinkedList<>();//链表结构的队列在Java中就是LinkedList,不需要指定初始化容量
+//java中的队列有两种分别是ArrayList和Linkedlist，常常使用LinkedList
+        LinkedList<TreeNode> queue = new LinkedList<>();
         queue.add(root);
 
         int hight = 0;

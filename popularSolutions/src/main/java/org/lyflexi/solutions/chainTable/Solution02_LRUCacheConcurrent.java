@@ -1,6 +1,6 @@
 package org.lyflexi.solutions.chainTable;
 
-import org.lyflexi.solutions.chainTable.structDef.NodeLRU;
+import org.lyflexi.solutions.chainTable.structDef.DListNode;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
@@ -15,12 +15,12 @@ public class Solution02_LRUCacheConcurrent {
     }
 
 
-    private final NodeLRU dummy;
+    private final DListNode dummy;
     private final int capacity;
     private int count;
 
     //使用ConcurrentHashMap
-    ConcurrentHashMap<Integer, NodeLRU> mapToNode;
+    ConcurrentHashMap<Integer, DListNode> mapToNode;
     //引入读写锁ReentrantReadWriteLock
     private static ReentrantLock lock;
 
@@ -45,7 +45,7 @@ public class Solution02_LRUCacheConcurrent {
     }
 
     public Solution02_LRUCacheConcurrent(int capacity) {
-        dummy = new NodeLRU(0, 0);
+        dummy = new DListNode(0, 0);
         dummy.next = dummy;//初始化傀儡节点的后继指向自身
         dummy.pre = dummy;//初始化傀儡节点的前驱指向自身
         this.capacity = capacity;
@@ -57,7 +57,7 @@ public class Solution02_LRUCacheConcurrent {
     public int get(int key) {
         lock.lock();//因为get操作也包括了对链表的修改，所以没必要使用读写锁
         try {
-            NodeLRU cache = mapToNode.get(key);
+            DListNode cache = mapToNode.get(key);
             if (cache != null) {
                 moveToTail(cache);
                 return cache.getValue();
@@ -74,7 +74,7 @@ public class Solution02_LRUCacheConcurrent {
     public void put(int key, int value) {
         lock.lock();
         try {
-            NodeLRU cache = mapToNode.get(key);
+            DListNode cache = mapToNode.get(key);
             if (cache != null) {
                 cache.setValue(value);
                 mapToNode.put(key, cache);
@@ -90,7 +90,7 @@ public class Solution02_LRUCacheConcurrent {
                 count--;
             }
 
-            NodeLRU node = new NodeLRU(key, value);
+            DListNode node = new DListNode(key, value);
             addToTail(node);
             mapToNode.put(key, node);
         } catch (Exception e) {
@@ -101,7 +101,7 @@ public class Solution02_LRUCacheConcurrent {
     }
 
 
-    private void moveToTail(NodeLRU node) {
+    private void moveToTail(DListNode node) {
 
         //删除当前节点
         node.pre.next = node.next;
@@ -113,7 +113,7 @@ public class Solution02_LRUCacheConcurrent {
 
     }
 
-    private void addToTail(NodeLRU node) {
+    private void addToTail(DListNode node) {
         //先安置新节点自身的前驱与后继指针
         node.next = dummy;
         node.pre = dummy.pre;
