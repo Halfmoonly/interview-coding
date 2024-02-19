@@ -31,13 +31,13 @@ public class Solution03_LongestConsecutive {
     }
 
     public static int longestConsecutive(int[] nums) {
+        //用于o1的哈希比较
         HashSet<Integer> set = new HashSet<>();
         for (int i = 0; i < nums.length; i++) {
             set.add(nums[i]);
-        }
+        }//去重不会影响大局
+
         int gLongest = 1;
-
-
         for (int num:set){
             if (!set.contains(num-1)){//如果hash表中存在num-1，则说明num已经被计算过了，应当跳过！
                 int localLongest = 1;

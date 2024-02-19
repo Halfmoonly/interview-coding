@@ -1,4 +1,4 @@
-package org.lyflexi.solutions;
+package org.lyflexi.solutions.windows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +34,7 @@ import java.util.Scanner;
 起始索引等于 1 的子串是 "ba", 它是 "ab" 的异位词。
 起始索引等于 2 的子串是 "ab", 它是 "ab" 的异位词。
 * */
-public class Solution09_Heterogeneous {
+public class Solution03_Heterogeneous {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String s = scanner.nextLine();

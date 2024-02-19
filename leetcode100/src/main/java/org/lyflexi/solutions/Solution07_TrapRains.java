@@ -9,6 +9,7 @@ import java.util.Scanner;
  */
 
 /*
+42. 接雨水:
 * 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。
 *
 * 示例1：
@@ -30,6 +31,7 @@ public class Solution07_TrapRains {
     }
 
     //    解法二，采取空间换时间，将时间复杂度降为on，空间复杂度也提升为on
+    //每次只算每一格子的蓄水量为，【（前缀最大高度-后缀最大高度）的最小值-当前柱子高度】*1
     public static int trap(int[] height) {
         int n = height.length;
         int answer = 0;

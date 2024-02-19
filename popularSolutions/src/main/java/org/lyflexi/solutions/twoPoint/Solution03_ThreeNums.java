@@ -37,7 +37,7 @@ nums[0] + nums[3] + nums[4] = (-1) + 2 + (-1) = 0 。
 输出：[[0,0,0]]
 解释：唯一可能的三元组和为 0 。
  */
-public class Solution02_ThreeNums {
+public class Solution03_ThreeNums {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -46,7 +46,7 @@ public class Solution02_ThreeNums {
     }
 
     /*优化的思路来自于可不可以不用每次都从最两端重新夹闭？
-    * a = nums[i](i->0-n-3)  left = i+1  right = n-1
+    * a = nums[i](0<=i<=n-3)  left = i+1  right = n-1
     * 不超时，复杂度为n^2,因为base是a,for循环可以跳过base，因此也无需判断contains少了个logn
     *
     * 而超时解法，由于base是b，for循环不能跳过base，导致了代码中需要进一步判断contains增加了logn的复杂度*/
@@ -107,8 +107,8 @@ public class Solution02_ThreeNums {
     }
 
     /*
-    left=0,   b = nums[i](i->1~n-2)   right=n-1
-    超时，复杂度：n^2logn, 第一个n是for循环，第二个n是while循环，logn是contains判断
+    left=0,   b = nums[i](1<=i<=n-2)   right=n-1
+    超时，复杂度：n^2 * logn, 第一个n是for循环，第二个n是while循环，logn是contains判断
     */
     public static List<List<Integer>> threeSum(int[] nums) {
         int n = nums.length;

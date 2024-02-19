@@ -51,7 +51,7 @@ public class Solution06_ZConvert {
         int strLen = s.length();
         int T = 2*numRows-2;
         //列数：周期个数*一个周期所跨的列数
-        int n = (strLen+ T-1 )/T*(numRows-1);//注意，最后不足一个周期的需要按照一个周期补齐
+        int n = ((strLen+ T-1 )/T)*(numRows-1);//注意，最后不足一个周期的需要按照一个周期补齐：strLen+ T-1
 
         Character[][] matrix = new Character[numRows][n];
 

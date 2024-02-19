@@ -8,13 +8,7 @@ import java.util.Scanner;
  * @Date: 2024/2/5 13:51
  */
 
-/*f(x)=Math.min(f(x-1)+cost[x-1],f(x-2)+cost[x-2])，此处的f(x)即目标值，代表到第x阶的最小花费
-*
-* 题目要求的是爬出楼梯，因此目标对象是n+1
-*
-* 所以分析出初始值f(1)=0，f(2)=Math.min(cost[0],cost[1])
-*
-* */
+
 
 /*使用最小花费爬楼梯
 
@@ -41,6 +35,17 @@ import java.util.Scanner;
 - 支付 1 ，向上爬两个台阶，到达下标为 9 的台阶。
 - 支付 1 ，向上爬一个台阶，到达楼梯顶部。
 总花费为 6 。*/
+
+
+/*
+分析：
+f(x)=Math.min(f(x-1)+cost[x-1],f(x-2)+cost[x-2])，此处的f(x)即目标值，代表到第x阶的最小花费
+ *
+ * 题目要求的是爬出楼梯，因此目标对象是n+1
+ *
+ * 所以分析出初始值f(1)=0，f(2)=Math.min(cost[0],cost[1])
+ *
+ * */
 public class Solution04_MinCostClimbingStairs {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

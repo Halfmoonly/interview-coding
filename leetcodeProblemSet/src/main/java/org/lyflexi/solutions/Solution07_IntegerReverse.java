@@ -8,10 +8,7 @@ import java.util.Scanner;
  */
 
 
-/*7. 整数反转：基本的除模运算，关键点是越界处理
-- 不能计算出结果之后再判断越界，那将没有意义，有可能已经越界了
-- 在循环中模拟即将越界前的状态，将该状态与Integer.MAX_VALUE或者Integer.MIN_VALUE做比较
-
+/*7. 整数反转：
 给你一个 32 位的有符号整数 x ，返回将 x 中的数字部分反转后的结果。
 如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。
 假设环境不允许存储 64 位整数（有符号或无符号）。
@@ -36,6 +33,13 @@ import java.util.Scanner;
 
 
 */
+
+
+
+/*思路：
+基本的除模运算，关键点是越界处理
+- 不能计算出结果之后再判断越界，那将没有意义，有可能已经越界了
+- 在循环中模拟即将越界前的状态，将该状态与Integer.MAX_VALUE或者Integer.MIN_VALUE做比较*/
 public class Solution07_IntegerReverse {
 
     public static void main(String[] args) {

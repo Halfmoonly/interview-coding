@@ -31,18 +31,25 @@ public class Solution05_LongestPalindrome {
         System.out.println(longestPalindrome(s));
     }
 
+
+
+    //优化：不用list集合存储,
+    //全局设置start和maxLen变量，最后return s.substring(start,start+maxLen);
     public static String longestPalindrome(String s) {
         if (s.isEmpty()){
             return "";
         }
         int n = s.length();
+        int maxLen = 1;
+        int start = 0;
 
-        ArrayList<String> list = new ArrayList<>();
         for (int i = 0; i < n; i++) {
 
-            int innerLen = 1;//innerLen暂时没用，题目要求返回回文字符串本身
+            int innerLen = 1;
             int left = i-1;
             int right = i+1;
+
+
 
             char centerKey = s.charAt(i);
             while(left>=0&&s.charAt(left)==centerKey){
@@ -61,12 +68,53 @@ public class Solution05_LongestPalindrome {
                 innerLen+=2;
             }
 
-            String str = s.substring(left+1,right);
-            list.add(str);
+            if (innerLen>maxLen){
+                start = left+1;
+                maxLen = innerLen;
+            }
         }
 
-//        无论是min函数或者是max函数，比较器Comparator接口都要写成自然的形式
-        Optional<String> maxString = list.stream().max((s1, s2) -> s1.length() - s2.length());
-        return maxString.orElse("");
+
+        return s.substring(start,start+maxLen);
     }
+
+    //额外用到了list集合
+//    public static String longestPalindrome(String s) {
+//        if (s.isEmpty()){
+//            return "";
+//        }
+//        int n = s.length();
+//
+//        ArrayList<String> list = new ArrayList<>();
+//        for (int i = 0; i < n; i++) {
+//
+//            int innerLen = 1;//innerLen暂时没用，题目要求返回回文字符串本身
+//            int left = i-1;
+//            int right = i+1;
+//
+//            char centerKey = s.charAt(i);
+//            while(left>=0&&s.charAt(left)==centerKey){
+//                left--;
+//                innerLen++;
+//            }
+//
+//            while(right<n&&s.charAt(right)==centerKey){
+//                right++;
+//                innerLen++;
+//            }
+//
+//            while(left>=0&&right<n&&s.charAt(left)==s.charAt(right)){
+//                left--;
+//                right++;
+//                innerLen+=2;
+//            }
+//
+//            String str = s.substring(left+1,right);
+//            list.add(str);
+//        }
+//
+////        无论是min函数或者是max函数，比较器Comparator接口都要写成自然的形式
+//        Optional<String> maxString = list.stream().max((s1, s2) -> s1.length() - s2.length());
+//        return maxString.orElse("");
+//    }
 }

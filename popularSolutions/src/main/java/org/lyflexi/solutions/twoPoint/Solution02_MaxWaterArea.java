@@ -24,7 +24,7 @@ package org.lyflexi.solutions.twoPoint;
 
 *
 * */
-public class Solution01_MaxWaterArea {
+public class Solution02_MaxWaterArea {
 
     public int maxArea(int[] height) {
         int len = height.length;

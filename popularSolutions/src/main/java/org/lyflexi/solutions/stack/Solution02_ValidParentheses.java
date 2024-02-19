@@ -34,45 +34,80 @@ public class Solution02_ValidParentheses {
         System.out.println(isValid(s));
     }
 
-
+    //map(')','())'),其实代码量都差不多，没啥区别
     public static boolean isValid(String s) {
-
-        HashMap<Character, Character> leftToRight = new HashMap<>();
-        leftToRight.put('(', ')');
-        leftToRight.put('{', '}');
-        leftToRight.put('[', ']');
+        HashMap<Character, Character> rightToleft = new HashMap<>();
+        rightToleft.put(')', '(');
+        rightToleft.put('}', '{');
+        rightToleft.put(']', '[');
 
         Stack<Character> stack = new Stack<>();
 
 
-        Collection<Character> values = leftToRight.values();
-        if (values.contains(s.charAt(0))){
-            return false;
-        }
-
-
         int n = s.length();
-        Set<Character> keySet = leftToRight.keySet();
+
         for (int i = 0; i < n; i++) {
 
             char c = s.charAt(i);
 
-            if (!stack.isEmpty()){
-                if (leftToRight.get(stack.peek()).equals(c)) {
+            if (!stack.isEmpty()) {
+                if (stack.peek().equals(rightToleft.get(c))) {
                     stack.pop();
-                }else if (!keySet.contains(c)) {
+                } else if (rightToleft.containsKey(c)){
                     return false;
                 }
-            }else if (!keySet.contains(c)){
+            }else if(rightToleft.containsKey(c)){
                 return false;
             }
 
-            if (keySet.contains(c)) {
+            if (!rightToleft.containsKey(c)) {
                 stack.add(c);
             }
-
         }
+
         return stack.isEmpty();
     }
+
+
+    //map('(',')')
+//    public static boolean isValid(String s) {
+//
+//        HashMap<Character, Character> leftToRight = new HashMap<>();
+//        leftToRight.put('(', ')');
+//        leftToRight.put('{', '}');
+//        leftToRight.put('[', ']');
+//
+//        Stack<Character> stack = new Stack<>();
+//
+//
+//        Collection<Character> values = leftToRight.values();
+//        if (values.contains(s.charAt(0))){
+//            return false;
+//        }
+//
+//
+//        int n = s.length();
+//        Set<Character> keySet = leftToRight.keySet();
+//        for (int i = 0; i < n; i++) {
+//
+//            char c = s.charAt(i);
+//
+//            if (!stack.isEmpty()){
+//                if (leftToRight.get(stack.peek()).equals(c)) {
+//                    stack.pop();
+//                }else if (!keySet.contains(c)) {
+//                    return false;
+//                }
+//            }else if (!keySet.contains(c)){
+//                return false;
+//            }
+//
+//            if (keySet.contains(c)) {
+//                stack.add(c);
+//            }
+//
+//        }
+//        return stack.isEmpty();
+//    }
 
 }

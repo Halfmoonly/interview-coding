@@ -35,13 +35,16 @@ public class Solution02_Allogramwords {
     }
 
     public static List<List<String>> groupAnagrams(String[] strs) {
+//        map的key是这一组异位词的唯一标识String
+//        map的value是这一组异位词List<String>
         HashMap<String, ArrayList<String>> map = new HashMap<>();
         for (int i = 0; i < strs.length; i++) {
             String str = strs[i];
+//            将按照字母排序后的String作为key
             char[] charArray = str.toCharArray();
             Arrays.sort(charArray);
             String key = new String(charArray);
-
+//            map数组更新
             ArrayList<String> innerList = map.get(key);
             if (innerList == null) {
                 innerList = new ArrayList<>();
