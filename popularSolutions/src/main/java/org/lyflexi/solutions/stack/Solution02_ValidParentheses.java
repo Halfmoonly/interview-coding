@@ -60,6 +60,7 @@ public class Solution02_ValidParentheses {
                 return false;
             }
 
+            //栈中只允许进入左括号
             if (!rightToleft.containsKey(c)) {
                 stack.add(c);
             }

@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class Solution01_LoopQueueByArray {
         private int front;
-        //rear指针是一定时时刻刻指向最后一个元素的下一个位置的,这是一定的，是客观存在的
+        //rear指针是一定时时刻刻指向最后一个元素的下一个位置的,这是一定的，是客观存在的，请保持习惯
         private int rear;
         private int capacity;
         private int[] elements;//循环队列内部维护的数组，尺寸会比初始化容量多1

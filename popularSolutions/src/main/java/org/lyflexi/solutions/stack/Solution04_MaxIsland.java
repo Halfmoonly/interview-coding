@@ -57,7 +57,7 @@ public class Solution04_MaxIsland {
                 stackj.push(j);//栈中存储纵坐标
                 while (!stacki.isEmpty()) {
                     int cur_i = stacki.pop(), cur_j = stackj.pop();
-                    //边界异常处理，但是不要忘了最关键的一个条件|| grid[cur_i][cur_j] != 1，此条件不加 栈是会溢出的
+                    //边界异常处理，但是不要忘了最关键的一个条件|| grid[cur_i][cur_j] != 1，此条件不加栈是会溢出的
                     if (cur_i < 0 || cur_j < 0 || cur_i == grid.length || cur_j == grid[0].length || grid[cur_i][cur_j] != 1) {
                         continue;
                     }

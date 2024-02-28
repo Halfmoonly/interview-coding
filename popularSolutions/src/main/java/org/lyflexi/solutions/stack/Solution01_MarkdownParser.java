@@ -49,7 +49,7 @@ public class Solution01_MarkdownParser {
                     root.children.add(node);
                 }
 //            }
-            stack.push(node);
+            stack.push(node);//辅助栈不需要返回，仅用于构造最终结果之前的栈判断
         }
         return root;
     }

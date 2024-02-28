@@ -56,7 +56,7 @@ public class Solution03_TopKByHeap {
             Integer value = entry.getValue();
 
             if (priorityQueue.size()==k){
-                //淘汰策略，当堆中最小元素小于当前entry
+                //淘汰策略，当堆中最小元素频次小于当前entry的频次
                 Map.Entry<Integer, Integer> peek = priorityQueue.peek();
                 if (peek.getValue()<value){
                     priorityQueue.poll();
@@ -79,7 +79,7 @@ public class Solution03_TopKByHeap {
     }
 
     /*使用了排序API，nlogn的复杂度*/
-    public static int[] topKFrequent(int[] nums, int k) {
+/*    public static int[] topKFrequent(int[] nums, int k) {
 
         int n = nums.length;
 
@@ -99,5 +99,5 @@ public class Solution03_TopKByHeap {
             topK[i] = sortedList.get(i).getKey();
         }
         return topK;
-    }
+    }*/
 }
