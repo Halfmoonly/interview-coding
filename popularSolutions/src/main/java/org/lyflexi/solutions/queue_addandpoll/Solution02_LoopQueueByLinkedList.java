@@ -1,6 +1,6 @@
-package org.lyflexi.solutions.queue;
+package org.lyflexi.solutions.queue_addandpoll;
 
-import org.lyflexi.solutions.queue.structDef.ListNode;
+import org.lyflexi.solutions.queue_addandpoll.structDef.ListNode;
 
 /**
  * @Author: ly

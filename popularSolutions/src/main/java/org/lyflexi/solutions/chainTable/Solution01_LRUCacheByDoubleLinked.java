@@ -85,6 +85,7 @@ public class Solution01_LRUCacheByDoubleLinked {
         this.capacity = capacity;
     }
 
+    //我规定尾部是最新的
     public int get(int key) {
 
         DListNode cache = mapToNode.get(key);

@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.stack;
+package org.lyflexi.solutions.stack_pushandpop;
 
 import java.util.Stack;
 

@@ -31,17 +31,23 @@ public class Solution04_SymmetricTree {
 //    node1与node2的true或者false组合一共就是下面四种情况
 
 
-        if (node1 == null &&node2==null) {//1种
-            return true;
+        if (node1 == null && node2 == null) {
+            return true;//出口true
         }
 
-        if (node1==null||node2==null){//2种
-            return false;
+
+        if (node1==null||node2==null){
+            return false;//出口false
         }
 
-        return node1.val == node2.val
-                && checkTwoTree(node1.left, node2.right)
-                && checkTwoTree(node1.right, node2.left);//一种：node1 != null &&node2!=null
+        //业务逻辑
+        if (node1.val == node2.val){
+            return checkTwoTree(node1.left, node2.right)
+                    && checkTwoTree(node1.right, node2.left);//一种：node1 != null &&node2!=null
+        }
 
+        return false;
     }
 }
+
+

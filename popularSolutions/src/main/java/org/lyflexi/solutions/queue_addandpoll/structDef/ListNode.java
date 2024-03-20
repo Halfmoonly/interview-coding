@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.queue.structDef;
+package org.lyflexi.solutions.queue_addandpoll.structDef;
 
 /**
  * @Author: ly

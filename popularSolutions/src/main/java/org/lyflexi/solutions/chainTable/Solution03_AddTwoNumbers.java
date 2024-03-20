@@ -71,7 +71,8 @@ public class Solution03_AddTwoNumbers {
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         //初始化假头节点，便于后续统一节点操作
         ListNode dummy = new ListNode();
-        //固定ansNode的头节点不动，派出手下去建立索引
+        //需要创建新链表，dummy不能再指向头
+        // 固定ansNode的头节点不动，派出手下去创建索引
         ListNode cur = dummy;
 
         int carry = 0;

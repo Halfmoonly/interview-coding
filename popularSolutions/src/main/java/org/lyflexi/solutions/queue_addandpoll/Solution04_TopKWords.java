@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.queue;
+package org.lyflexi.solutions.queue_addandpoll;
 
 import java.util.*;
 

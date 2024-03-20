@@ -1,7 +1,6 @@
-package org.lyflexi.solutions.queue;
+package org.lyflexi.solutions.queue_addandpoll;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @Author: ly
