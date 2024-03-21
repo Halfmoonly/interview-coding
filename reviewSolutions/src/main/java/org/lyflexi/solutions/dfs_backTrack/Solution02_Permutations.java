@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.backTrack;
+package org.lyflexi.solutions.dfs_backTrack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +36,7 @@ public class Solution02_Permutations {
 
     public static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> answer = new ArrayList<>();
-        ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();//回溯发动机，内部元素list
 
 
         dfsBackTrace(nums,answer,list);//list本身通过增减操作就可以控制DFS深度，所以回溯函数中省去了DFS深度控制参数
@@ -55,7 +55,8 @@ public class Solution02_Permutations {
 
         for (int i = 0; i < n; i++) {
             int item = nums[i];
-            if (list.contains(item)){//选择的限制条件
+
+            if (list.contains(item)){//每次都从头开始遍历nums,所以这里是在纵向去重，而且省略了标记数组flag
                 continue;
             }
 

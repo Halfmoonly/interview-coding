@@ -1,7 +1,6 @@
-package org.lyflexi.solutions.backTrack;
+package org.lyflexi.solutions.dfs_backTrack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -38,9 +37,9 @@ public class Solution01_GenerateParenthesis {
 
 
     public static List<String> generateParenthesis(int n) {
-        StringBuilder sb = new StringBuilder();//回溯发动机""空字符串，StringBuilder的拼接效率会更高
+        StringBuilder sb = new StringBuilder();//回溯发动机，内部元素""空字符串，StringBuilder的拼接效率会更高
         ArrayList<String> answer = new ArrayList<>();
-        backTrace(0,0,sb,n,answer);
+        backTrace(0,0,sb,n,answer);//open和close之和变相代表了回溯深度
         return answer;
     }
 
@@ -54,7 +53,6 @@ public class Solution01_GenerateParenthesis {
         }
 
 
-        //下面是进行选择的两个限制条件
 
 //        1.放置左括号,当左括号数量小于最大值
         if (open<maxPairs) {
@@ -72,3 +70,8 @@ public class Solution01_GenerateParenthesis {
     }
 
 }
+
+/*注意：在递归调用中对 open 和 close 执行++open或者++close操作，
+这意味着在递归调用中，open 和 close 的值被增加了，但是递归的下一步却使用了这些已经增加了的值，而不是当前的值。这会导致计数不正确，影响到生成括号的逻辑。
+你可以通过使用 open + 1 和 close + 1 来修正这个问题
+*/
