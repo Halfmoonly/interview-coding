@@ -26,7 +26,7 @@ import java.util.Scanner;
 输入：obstacleGrid = [[0,1],[0,0]]
 输出：1
 */
-public class Solution09_PathsWithObstacles {
+public class Solution12_PathsWithObstacles {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

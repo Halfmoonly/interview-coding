@@ -25,7 +25,7 @@ arr[i] > arr[i + 1] > ... > arr[arr.length - 1]
 输出：0
 解释：不存在山脉子数组。
 * */
-public class Solution10_LongestMountain {
+public class Solution13_LongestMountain {
     public int longestMountain(int[] arr) {
         int answer = 0;
 

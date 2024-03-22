@@ -29,7 +29,7 @@ import java.util.Scanner;
 输入：m = 3, n = 3
 输出：6
 */
-public class Solution07_TwoDimension {
+public class Solution10_TwoDimension {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int m = Integer.parseInt(scanner.nextLine());

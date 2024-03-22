@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 
 
-/*
+/*740. 删除并获得点数
 * 此题将数组转化为，以0~maxItem为下标，Item的个数为新Item的新数组，对新数组应用打家劫舍
 *
 * 最后注意一点，新的dp公式要时刻乘以新索引：f(x) = Math.max(f(x-2)+新muns[x-2]*(x-2),f(x-1))
@@ -35,7 +35,7 @@ import java.util.Scanner;
 之后，再次删除 3 获得 3 个点数，再次删除 3 获得 3 个点数。
 总共获得 9 个点数。
 * */
-class Solution06_DeleteAndEarn {
+class Solution09_DeleteAndEarn {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int[] array = Arrays.stream(scanner.nextLine().split(",")).mapToInt(Integer::parseInt).toArray();

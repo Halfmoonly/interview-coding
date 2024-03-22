@@ -26,7 +26,7 @@ import java.util.Scanner;
 
 
 */
-public class Solution08_MinPathSum {
+public class Solution11_MinPathSum {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("请输入行数");
