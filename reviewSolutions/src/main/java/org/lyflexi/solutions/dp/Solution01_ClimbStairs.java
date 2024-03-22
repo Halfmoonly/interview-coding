@@ -37,24 +37,19 @@ public class Solution01_ClimbStairs {
     }
 
     public static int climbStairs(int n) {
-
-        if (n==1){
+        if(n==1){
             return 1;
         }
-
-        if (n==2){
-            return 2;
-        }
-
+        //下标代表真实意义的dp数组
+        int[] dp= new int[n+1];
+        dp[1] = 1;
+        dp[2] = 2;
         int x = 1,y=2,z=0;
         //前面已经计算过2次，总共计算1~n,因此再计算n-2次即可，i并没有实际意义
-        for (int i = 0; i < n-2; i++) {
-
-            z = x+y;
-            x=y;
-            y=z;
+        for (int i = 3; i < n+1; i++) {
+            dp[i] = dp[i-1]+dp[i-2];
         }
 
-        return z;
+        return dp[n];
     }
 }

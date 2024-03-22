@@ -39,20 +39,13 @@ public class Solution03_Tribonacci {
             return 1;
         }
 
-        if (n==2){
-            return 1;
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+        dp[2] = 1;
+        for (int i = 3; i < n+1; i++) {
+            dp[i] = dp[i-1]+dp[i-2]+dp[i-3];
         }
-
-        int x = 0,y=1,z=1,t;
-        //前面已经计算过3次，再计算n-2次即可，因为0~n总共要计算n+1个情况
-        for (int i = 0; i < n-2; i++) {
-
-            t=x+y+z;
-            x = y;
-            y=z;
-            z=t;
-        }
-
-        return z;
+        return dp[n];
     }
 }

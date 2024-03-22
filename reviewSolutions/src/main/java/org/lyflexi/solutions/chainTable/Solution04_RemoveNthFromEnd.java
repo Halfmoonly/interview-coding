@@ -32,8 +32,7 @@ public class Solution04_RemoveNthFromEnd {
         ListNode dummy = new ListNode();
         dummy.next = head;
         //cur用于计数
-        ListNode cur = new ListNode();
-        cur = head;
+        ListNode cur = head;
 
         int count = 0;
         while(cur!=null){

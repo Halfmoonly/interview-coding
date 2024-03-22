@@ -38,8 +38,7 @@ import java.util.Scanner;
 
 
 /*
-分析：
-f(x)=Math.min(f(x-1)+cost[x-1],f(x-2)+cost[x-2])，此处的f(x)即目标值，代表到第x阶的最小花费
+
  *
  * 题目要求的是爬出楼梯，因此目标对象是n+1
  *
@@ -54,22 +53,19 @@ public class Solution04_MinCostClimbingStairs {
     }
     public static int minCostClimbingStairs(int[] cost) {
         int n = cost.length;
-        if (n==1){
-            return 0;
-        }
-        if (n==2){
-            return Math.min(cost[0],cost[1]);
-        }
+        int[] dp = new int[n+2];
+        dp[1] = 0;
+        dp[2] = 0;
 
-        int x = 0,y=0,z=0;
-        //前面已经计算过2次，但是这道题要求爬出楼梯，目标对象是1~n+1,因此需要再计算n-1次
-        for (int i = 0; i < n-1; i++) {
 
-            z = Math.min(y+cost[i+1],x+cost[i]);
-            x=y;
-            y=z;
+        //数学公式：f(x)=Math.min(f(x-1)+cost[x-1],f(x-2)+cost[x-2])，此处的f(x)即目标值，代表到第x阶的最小花费
+        for(int i = 3;i<n+1;i++){
+            //代码公式：
+            dp[i] = Math.min(dp[i-1]+cost[i-2],dp[i-2]+cost[i-3]);
         }
 
-        return y;
+        dp[n+1] = Math.min(dp[n]+cost[n-1],dp[n-1]+cost[n-2]);
+
+        return dp[n+1];
     }
 }
