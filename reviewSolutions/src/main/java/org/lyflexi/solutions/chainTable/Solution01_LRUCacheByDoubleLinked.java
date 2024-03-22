@@ -1,14 +1,13 @@
 package org.lyflexi.solutions.chainTable;
 
-
-import org.lyflexi.solutions.chainTable.structDef.DListNode;
-
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: ly
- * @Date: 2024/2/9 23:10
+ * @Date: 2024/3/22 12:08
  */
+
 /*
 * 146. LRU 缓存:
 * 思路：对于链表的增删改查操作，时间复杂度分析如下
@@ -47,104 +46,117 @@ lRUCache.get(1);    // 返回 -1 (未找到)
 lRUCache.get(3);    // 返回 3
 lRUCache.get(4);    // 返回 4
 * */
-public class Solution01_LRUCacheByDoubleLinked {
-
-
+class Solution01_LRUCacheByDoubleLinked {
     public static void main(String[] args) {
 
-        Solution01_LRUCacheByDoubleLinked solution06LruCache = new Solution01_LRUCacheByDoubleLinked(3);
-        solution06LruCache.put(1,1);
-        solution06LruCache.put(2,2);
-        solution06LruCache.put(3,3);
-        solution06LruCache.put(4,4);
-        solution06LruCache.get(4);
-        solution06LruCache.get(3);
-        solution06LruCache.get(2);
-        solution06LruCache.get(1);
-        solution06LruCache.put(5,5);
+        Solution01_LRUCacheByDoubleLinked solution01LruCacheByDoubleLinked = new Solution01_LRUCacheByDoubleLinked(2);
+        solution01LruCacheByDoubleLinked.put(1,1);
+        solution01LruCacheByDoubleLinked.put(2,2);
+        solution01LruCacheByDoubleLinked.get(1);
+        solution01LruCacheByDoubleLinked.put(3,3);
 
-        solution06LruCache.get(1);
-        solution06LruCache.get(2);
-        solution06LruCache.get(3);
-        solution06LruCache.get(4);
-        solution06LruCache.get(5);
+        solution01LruCacheByDoubleLinked.get(2);
+        solution01LruCacheByDoubleLinked.put(4,4);
+        solution01LruCacheByDoubleLinked.get(1);
+        solution01LruCacheByDoubleLinked.get(2);
+        solution01LruCacheByDoubleLinked.get(3);
 
     }
+    public class DNode {
+        public int key;
+        public int value;
+        public DNode next;
+        public DNode prev;
+        public DNode(int key, int value){
+            this.key = key;
+            this.value = value;
+        }
+    }
+    //传入最大容量，用于判断链表是否满,
+    int capacity = 0;
+    //LRU是个缓存队列
+    Map<Integer,DNode> keyToDNodeCache = new HashMap<>();
+    //动态记录长度
+    int curLen = 0;
 
-    private DListNode dummy;
-    private int capacity;
-    private int count;
-    HashMap<Integer, DListNode> mapToNode = new HashMap<>();
-
+    DNode dummy;
 
     public Solution01_LRUCacheByDoubleLinked(int capacity) {
-        //傀儡节点用于统一操作，将对head节点的操作统一进来
-        dummy = new DListNode(0, 0);
-        dummy.next = dummy;//初始化傀儡节点的后继指向自身
-        dummy.pre = dummy;//初始化傀儡节点的前驱指向自身
         this.capacity = capacity;
+        //创建虚拟头节点
+        dummy = new DNode(0,0);
+        dummy.next = dummy;
+        dummy.prev = dummy;
     }
 
-    //我规定尾部是最新的
+    //如果关键字 key 存在于缓存中，则返回关键字的值，否则返回 -1 。
     public int get(int key) {
 
-        DListNode cache = mapToNode.get(key);
-        if (cache!=null){
-            moveToTail(cache);
-            return cache.getValue();
+        DNode node = keyToDNodeCache.get(key);
+        if(node!=null){
+            moveToTail(node);
+            return node.value;
         }
-        //缓存为空
+
         return -1;
+
     }
 
     public void put(int key, int value) {
-        DListNode cache = mapToNode.get(key);
-        if (cache!=null){
-            cache.setValue(value);
-            mapToNode.put(key,cache);
-            moveToTail(cache);
+        DNode node = keyToDNodeCache.get(key);
+
+        //有缓存，则只更新缓存
+        if(node!=null){
+            node.value = value;
+            moveToTail(node);//队列新增
+            keyToDNodeCache.put(key,node);//更新缓存
             return;
         }
-        //缓存为null
-        count++;
-        if (count>capacity){
-            //淘汰策略
-            mapToNode.remove(dummy.next.getKey());
-            delHead();
-            count--;
+
+        //队列满，则删除头新增尾，并更新缓存
+        if(curLen+1>capacity){
+            keyToDNodeCache.remove(dummy.next.key);//先把头节点对应的缓存删除
+            removeHead();//再删除队列头
+            node = new DNode(key,value);
+            addToTail(node);
+            keyToDNodeCache.put(key,node);//新增缓存
+            return;//容量最终不变
         }
 
-        DListNode node = new DListNode(key, value);
+        //正常情况
+        node = new DNode(key,value);
         addToTail(node);
-        mapToNode.put(key,node);
+        keyToDNodeCache.put(key,node);
+        curLen++;
+
     }
 
-
-
-
-    private void moveToTail(DListNode node) {
-
-        //删除当前节点
-        node.pre.next = node.next;
-        node.next.pre = node.pre;
-
-
-        //尾部新增
+    private void moveToTail(DNode node){
+        //删除当前节点，需要修改两个指针
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
         addToTail(node);
-
     }
-    private void addToTail(DListNode node) {
-        //先安置新节点自身的前驱与后继指针
+
+    private void addToTail(DNode node){
+        //需要修改四个指针
+        node.prev = dummy.prev;
         node.next = dummy;
-        node.pre = dummy.pre;
 
-        dummy.pre.next = node;
-        dummy.pre = node;
+        dummy.prev.next  = node;
+        dummy.prev = node;
     }
-//由于是先进先出，所以出队相当于删除头节点
-    private void delHead() {
-        dummy.next.next.pre = dummy;
+
+    private void removeHead(){
+        //修改两个指针即可
+        dummy.next.next.prev = dummy;
         dummy.next = dummy.next.next;
     }
-
 }
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
