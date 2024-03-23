@@ -41,7 +41,7 @@ public class Solution04_LevelOrder {
         LinkedList<TreeNode> queue = new LinkedList<>();
 
         List<List<Integer>> answer = new ArrayList<>();
-        queue.add(root);
+        queue.offer(root);
         while (!queue.isEmpty()){
 
             ArrayList<Integer> levelList = new ArrayList<>();
@@ -52,11 +52,11 @@ public class Solution04_LevelOrder {
                 levelList.add(poll.val);
 
                 if (poll.left!=null){
-                    queue.add(poll.left);
+                    queue.offer(poll.left);
                 }
 
                 if (poll.right!=null){
-                    queue.add(poll.right);
+                    queue.offer(poll.right);
                 }
 
             }

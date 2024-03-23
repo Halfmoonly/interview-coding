@@ -29,7 +29,7 @@ public class Solution05_TreeDepth {
         //queue的方法是add和poll
         //stack的方法是push和pop
         LinkedList<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
+        queue.offer(root);
 
         int hight = 0;
 
@@ -41,10 +41,10 @@ public class Solution05_TreeDepth {
                 TreeNode node = queue.poll();
                 //添加下一层节点
                 if (node.left!=null){
-                    queue.add(node.left);
+                    queue.offer(node.left);
                 }
                 if (node.right!= null){
-                    queue.add(node.right);
+                    queue.offer(node.right);
                 }
 
             }

@@ -67,7 +67,7 @@ public class Solution11_MaxWindow {
         int[] answer = new int[n - k + 1];
 
         for (int i = 0; i < k; i++) {
-            queue.add(new int[]{nums[i],i});
+            queue.offer(new int[]{nums[i],i});
         }
 
         for (int i = k; i < n; i++) {
@@ -78,7 +78,7 @@ public class Solution11_MaxWindow {
                 queue.poll();
             }
 
-            queue.add(new int[]{nums[i],i});
+            queue.offer(new int[]{nums[i],i});
 
         }
 

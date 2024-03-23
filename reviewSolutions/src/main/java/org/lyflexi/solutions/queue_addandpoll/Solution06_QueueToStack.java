@@ -26,14 +26,14 @@ public class Solution06_QueueToStack {
 
     public void push(int x) {
 
-        queue.add(x);
+        queue.offer(x);
 
 
         int size = queue.size();
 
         for (int i = 0; i < size - 1; i++) {
             Integer poll = (Integer) queue.poll();
-            queue.add(poll);
+            queue.offer(poll);
         }
 
 

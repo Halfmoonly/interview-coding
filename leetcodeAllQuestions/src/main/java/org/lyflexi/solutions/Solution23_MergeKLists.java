@@ -38,7 +38,7 @@ public class Solution23_MergeKLists {
             for (int i = 0; i < n; i++) {
                 ListNode node = lists[i];
                 if (node!=null){//防止优先队列PriorityQueue底层排序的时候出现空指针异常
-                    queue.add(lists[i]);
+                    queue.offer(lists[i]);
                 }
 
             }
@@ -52,7 +52,7 @@ public class Solution23_MergeKLists {
                 cur.next = poll;
                 cur = cur.next;
                 if (poll.next!=null){
-                    queue.add(poll.next);
+                    queue.offer(poll.next);
                 }
 
 

@@ -65,12 +65,12 @@ public class Solution06_MaxWindowHard {
         int n = nums.length;
         int[] answer = new int[n - k + 1];
         for (int i = 0; i < k; i++) {
-            queue.add(new int[]{nums[i],i});
+            queue.offer(new int[]{nums[i],i});
         }
         answer[0] = queue.peek()[0];
         for (int i = 1; i < n - k + 1; i++) {
             //窗口往后走
-            queue.add(new int[]{nums[i+k-1],i+k-1});
+            queue.offer(new int[]{nums[i+k-1],i+k-1});
             //只负责删除不在窗口内的大元素，小元素放在堆中我不管
             while (!queue.isEmpty()&&queue.peek()[1]<i){
                 queue.poll();
