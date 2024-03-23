@@ -9,10 +9,12 @@ import java.util.Scanner;
 
 
 /*
+622. 设计循环队列
 使用数组去实现循环队列
 循环队列的一个好处是我们可以利用这个队列之前用过的空间。
 在一个普通队列里，一旦一个队列满了我们就不能插入下一个元素，即使在队列前面仍有空间。但是使用循环队列，我们能使用这些空间去存储新的值。
-* */
+*
+*/
 
 
 public class Solution01_LoopQueueByArray {
@@ -61,6 +63,7 @@ public class Solution01_LoopQueueByArray {
             if (isEmpty()) {
                 return -1;
             }
+            //因为数组是循环的，当rear-1=0不代表数组中仅有1个元素，防止数组越界
             return elements[(rear - 1 + capacity) % capacity];//rear日常指向末位元素的下一个位置
         }
 

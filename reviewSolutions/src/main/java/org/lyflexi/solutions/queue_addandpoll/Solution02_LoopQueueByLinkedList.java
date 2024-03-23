@@ -7,7 +7,9 @@ import org.lyflexi.solutions.queue_addandpoll.structDef.ListNode;
  * @Date: 2024/2/15 19:13
  */
 
-/*使用链表去实现循环队列十分简单，因为链表天然就是无限增长的，无需在设计层面考虑循环*/
+/*
+622. 设计循环队列
+使用链表去实现循环队列十分简单，因为链表天然就是无限增长的，无需在设计层面考虑循环*/
 public class Solution02_LoopQueueByLinkedList {
     ListNode front;
     ListNode rear;

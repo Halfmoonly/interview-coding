@@ -31,12 +31,14 @@ public class Solution13_LongestMountain {
 
         int n = arr.length;
         int[] left = new int[n];//这是个dp数组，求每个元素的左边可以延申的距离
+        //默认left[0]为0
         for (int i = 1; i < n; i++) {
             left[i] = arr[i - 1] < arr[i] ? left[i - 1] + 1 : 0;
         }
 
 
         int[] right = new int[n];//这是个dp数组，求每个元素的右边可以延申的距离
+        //默认right[n-1]为0
         for (int i = n - 2; i >= 0; i--) {
             right[i] = arr[i + 1] < arr[i] ? right[i + 1] + 1 : 0;
         }

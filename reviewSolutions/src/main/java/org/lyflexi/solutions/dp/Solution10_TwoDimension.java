@@ -38,6 +38,7 @@ public class Solution10_TwoDimension {
     }
 
     public static int uniquePaths(int m, int n) {
+        //题目就是二维矩阵，所以长度不用设置为[m+1][n+1]
         int[][] dp = new int[m][n];
 
 

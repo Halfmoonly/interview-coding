@@ -50,11 +50,13 @@ public class Solution05_ReversePolish {
     public int evalRPN(String[] tokens) {
         LinkedList<Integer> stack = new LinkedList<>();
         for (String item:tokens){
+            //如果item是数字进栈
             if (isNumber(item)){
                 stack.push(Integer.valueOf(item));
-            }else {
-                Integer right = stack.pop();//出栈函数是pop
-                Integer left = stack.pop();//出栈函数是pop
+            }else {//如果item运算符号
+
+                Integer right = stack.pop();//出栈函数是pop,第一次出栈的作为右元素
+                Integer left = stack.pop();//出栈函数是pop,第一次出栈的作为左元素
 
                 if ("+".equals(item)){
                     stack.push(left+right);

@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.queue_addandpoll;
+package org.lyflexi.solutions.tree;
 
 import org.lyflexi.solutions.tree.structDef.TreeNode;
 
@@ -16,19 +16,16 @@ LCR 175. 计算二叉树的深度
 *
 *
 * */
-public class Solution05_TreeDepth {
+public class Solution06_TreeDepthByQueue {
 
 
-    //用队列实现广度优先遍历
     public int calculateDepth(TreeNode root) {
 
         if (root==null){
             return 0;
         }
-        //Java中的队列和栈都叫LinkedList
-        //queue的方法是add和poll
-        //stack的方法是push和pop
-        LinkedList<TreeNode> queue = new LinkedList<>();
+
+        LinkedList<TreeNode> queue = new LinkedList<>();//链表结构的队列在Java中就是LinkedList,不需要指定初始化容量
         queue.add(root);
 
         int hight = 0;
