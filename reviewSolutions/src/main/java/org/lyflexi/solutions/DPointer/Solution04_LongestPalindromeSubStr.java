@@ -1,7 +1,5 @@
-package org.lyflexi.solutions;
+package org.lyflexi.solutions.DPointer;
 
-import java.util.ArrayList;
-import java.util.Optional;
 import java.util.Scanner;
 
 /**
@@ -9,7 +7,7 @@ import java.util.Scanner;
  * @Date: 2024/2/5 12:37
  */
 
-/*最长回文子串：中心扩散法
+/*最长回文子串：中心扩散法(双指针)
 给你一个字符串 s，找到 s 中最长的回文子串。
 如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。
 
@@ -22,7 +20,7 @@ import java.util.Scanner;
 输入：s = "cbbd"
 输出："bb"
  */
-public class Solution05_LongestPalindrome {
+public class Solution04_LongestPalindromeSubStr {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);

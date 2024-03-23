@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.doublePointer;
+package org.lyflexi.solutions.DPointer;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -22,7 +22,7 @@ import java.util.Scanner;
 输出: [0]
  */
 
-public class Solution01_MoveZeroes {
+public class Solution05_MoveZeroes {
 //    2024.1.11
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.slipingWindow;
+package org.lyflexi.solutions.Dpointer_slipingWindow;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;

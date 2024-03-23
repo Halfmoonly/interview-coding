@@ -1,11 +1,7 @@
-package org.lyflexi.solutions.slipingWindow;
+package org.lyflexi.solutions.Dpointer_slipingWindow;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Scanner;
-//同向移动的双指针就是滑动窗口，但是大部分情况下相向移动的双指针与滑动窗口没有任何关系
-//综上，滑动窗口与双指针不能混为一谈，对于滑动窗口而言往往利用for循环就可以解题
-
 
 /*滑动窗口：阿里巴巴找黄金宝箱(V)：滑动窗口
 * 难度	易

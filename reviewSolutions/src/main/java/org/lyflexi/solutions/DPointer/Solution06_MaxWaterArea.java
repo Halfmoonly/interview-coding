@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.doublePointer;
+package org.lyflexi.solutions.DPointer;
 
 /**
  * @Author: ly
@@ -24,7 +24,7 @@ package org.lyflexi.solutions.doublePointer;
 
 *
 * */
-public class Solution02_MaxWaterArea {
+public class Solution06_MaxWaterArea {
 
     public int maxArea(int[] height) {
         int len = height.length;
@@ -45,7 +45,6 @@ public class Solution02_MaxWaterArea {
             }
 
             answer = Math.max(curArea,answer);
-
 
         }
 
