@@ -15,7 +15,7 @@ import org.lyflexi.solutions.ListNode.structDef.ListNode;
 输入：head = [1,2,3,4,5], left = 2, right = 4
 输出：[1,4,3,2,5]
 * */
-public class Solution08_ReverseListⅡ {
+public class Solution09_ReverseListⅡ {
     public ListNode reverseBetween(ListNode head, int m, int n) {
         ListNode dummy = new ListNode(-1);
         dummy.next = head;

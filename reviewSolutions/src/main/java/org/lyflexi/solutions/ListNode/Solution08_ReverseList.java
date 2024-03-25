@@ -12,7 +12,7 @@ import org.lyflexi.solutions.ListNode.structDef.ListNode;
 
 假设链表为 1→2→3→null，我们想要把它改成 null←1←2←3
 */
-public class Solution07_ReverseList {
+public class Solution08_ReverseList {
     public ListNode reverseList(ListNode head) {
         //假设链表为 1→2→3→null，我们想要把它改成 3→2→1→null
         ListNode answer = null;

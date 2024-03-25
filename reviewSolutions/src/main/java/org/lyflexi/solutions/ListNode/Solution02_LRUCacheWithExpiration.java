@@ -54,6 +54,7 @@ class Solution02_LRUCacheWithExpiration {
     public int get(int key) {
         DNode node = keyToDNodeCache.get(key);
         if (node != null) {
+            //缓存过期情况
             if (System.currentTimeMillis() - node.timestamp > expire) {
                 //仿照redis惰性删除
                 keyToDNodeCache.remove(node.key);
@@ -61,7 +62,8 @@ class Solution02_LRUCacheWithExpiration {
                 removeNode(node);
                 return -1; // 过期了，返回-1
             }
-            //正常没过期
+
+            //正常情况，缓存没过期
             moveToTail(node);
             return node.value;
         }

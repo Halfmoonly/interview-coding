@@ -13,22 +13,24 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /*
 * 当前共享数据除了HashMap还有DNode，ConcurrentHashMap可以保证缓存的安全，但DNode的安全无法保证
 *
-* 所以最好使用synchronized/Lock来统一控制，使用读写锁ReentrantReadWrite优化性能:
+* 所以最好使用synchronized/Lock来统一控制，最终选择使用读写锁ReentrantReadWrite优化性能:
 * ReadWriteLock rwLock = = new ReentrantReadWriteLock();
 * - Lock readLock = rwLock.readLock();
 * - Lock writeLock = rwLock.writeLock();
 *
 * */
-class Solution03_LRUCacheWithRWLock {
+class Solution04_LRUCacheWithRWLockAndExpiration {
     static class DNode {
         int key;
         int value;
+        long expirationTime;
         DNode prev;
         DNode next;
 
-        public DNode(int key, int value) {
+        public DNode(int key, int value, long expirationTime) {
             this.key = key;
             this.value = value;
+            this.expirationTime = expirationTime;
         }
     }
 
@@ -41,24 +43,42 @@ class Solution03_LRUCacheWithRWLock {
     private final DNode dummy;
 
     //初始化成员变量
-    public Solution03_LRUCacheWithRWLock(int capacity) {
-        this.capacity = capacity;//final只赋值一次
-        this.keyToDNodeCache = new HashMap<>(capacity);//final只赋值一次
-        this.rwLock = new ReentrantReadWriteLock();//final只赋值一次
-        this.readLock = rwLock.readLock();//final只赋值一次
-        this.writeLock = rwLock.writeLock();//final只赋值一次
-        this.dummy = new DNode(0, 0);//final只赋值一次
+    public Solution04_LRUCacheWithRWLockAndExpiration(int capacity) {
+        this.capacity = capacity;
+        this.keyToDNodeCache = new HashMap<>(capacity);
+        this.rwLock = new ReentrantReadWriteLock();
+        this.readLock = rwLock.readLock();
+        this.writeLock = rwLock.writeLock();
+        this.dummy = new DNode(0, 0, Long.MAX_VALUE); // Dummy node with expiration time set to maximum
         this.dummy.next = this.dummy;
         this.dummy.prev = this.dummy;
     }
 
-    //读的时候，虽然keyToDNodeCache的安全的，但无法保证链表操作moveToTail安全
-    //处理方式：读写锁降级+DCL双减
+    //处理方式：分两种情况，分别使用写锁降级+DCL双减
     public int get(int key) {
         readLock.lock();
         try {
             DNode node = keyToDNodeCache.get(key);
             if (node != null) {
+                //缓存过期情况
+                if (node.expirationTime < System.currentTimeMillis()) {
+                    //在获取写锁之前，必须首先释放读锁。
+                    readLock.unlock();
+                    writeLock.lock();
+                    try {
+                        //DCL这里需要再次判断数据的有效性,因为在我们释放读锁和获取写锁的空隙之内，可能有其他写线程导致链表满删除了当前缓存。
+                        if (node != null) {
+                            keyToDNodeCache.remove(key);//?个人感觉没必要使用concurrenthashmap，因为这里要保证if代码块的原子性
+                            removeNode(node);
+                        }
+                    } finally {
+                        writeLock.unlock();
+                    }
+                    return -1; // Node has expired
+                }
+
+
+                //正常情况->缓存没过期
                 //在获取写锁之前，必须首先释放读锁。
                 readLock.unlock();
                 writeLock.lock();
@@ -80,7 +100,8 @@ class Solution03_LRUCacheWithRWLock {
             readLock.unlock();
         }
     }
-    public void put(int key, int value) {
+
+    public void put(int key, int value, long expirationTimeMillis) {
         writeLock.lock();
 
         try {
@@ -88,6 +109,7 @@ class Solution03_LRUCacheWithRWLock {
 
             if (node != null) {
                 node.value = value;
+                node.expirationTime = System.currentTimeMillis() + expirationTimeMillis; // Update expiration time
                 moveToTail(node);
                 return;
             }
@@ -98,7 +120,7 @@ class Solution03_LRUCacheWithRWLock {
                 removeNode(toRemove);
             }
 
-            node = new DNode(key, value);
+            node = new DNode(key, value, System.currentTimeMillis() + expirationTimeMillis);
             addToTail(node);
             keyToDNodeCache.put(key, node);
         } finally {
@@ -123,19 +145,19 @@ class Solution03_LRUCacheWithRWLock {
         node.next.prev = node.prev;
     }
 
-
-
     public static void main(String[] args) {
-        Solution03_LRUCacheWithRWLock lRUCache = new Solution03_LRUCacheWithRWLock(2);
-        lRUCache.put(1, 1);
-        lRUCache.put(2, 2);
+        Solution04_LRUCacheWithRWLockAndExpiration lRUCache = new Solution04_LRUCacheWithRWLockAndExpiration(2);
+        lRUCache.put(1, 1, 1000); // Adding with 1 second expiration
+        lRUCache.put(2, 2, 2000); // Adding with 2 second expiration
         System.out.println(lRUCache.get(1));       // 返回 1
-        lRUCache.put(3, 3);                        // 该操作会使得关键字 2 作废，缓存是 {1=1, 3=3}
-        System.out.println(lRUCache.get(2));       // 返回 -1 (未找到)
-        lRUCache.put(4, 4);                        // 该操作会使得关键字 1 作废，缓存是 {4=4, 3=3}
-        System.out.println(lRUCache.get(1));       // 返回 -1 (未找到)
-        System.out.println(lRUCache.get(3));       // 返回 3
-        System.out.println(lRUCache.get(4));       // 返回 4
+        System.out.println(lRUCache.get(2));       // 返回 2
+        try {
+            Thread.sleep(1500); // Sleep for 1.5 seconds
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(lRUCache.get(1));       // 返回 -1 (已过期)
+        System.out.println(lRUCache.get(2));       // 返回 2
     }
 }
 
