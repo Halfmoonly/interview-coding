@@ -24,7 +24,7 @@ import org.lyflexi.solutions.ListNode.structDef.ListNode;
 输入：head = [1,2], n = 1
 输出：[1]
 * */
-public class Solution04_RemoveNthFromEnd {
+public class Solution05_RemoveNthFromEnd {
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
 

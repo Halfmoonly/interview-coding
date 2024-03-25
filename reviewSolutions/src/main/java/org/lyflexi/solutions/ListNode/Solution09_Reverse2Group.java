@@ -13,7 +13,7 @@ import org.lyflexi.solutions.ListNode.structDef.ListNode;
 输入：head = [1,2,3,4]
 输出：[2,1,4,3]
 */
-public class Solution08_Reverse2Group {
+public class Solution09_Reverse2Group {
     public ListNode swapPairs(ListNode head) {
         ListNode dummyHead = new ListNode(0);
         dummyHead.next = head;//不需要创建新链表，在已有链表上就地操作
