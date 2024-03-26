@@ -26,7 +26,7 @@ import org.lyflexi.solutions.TreeNode.structDef.TreeNode;
 *
 *
 * */
-public class Solution13_CalculatePathSum {
+public class Solution15_CalculatePathSum {
     public int sumNumbers(TreeNode root) {
         return helper(root, 0);
     }

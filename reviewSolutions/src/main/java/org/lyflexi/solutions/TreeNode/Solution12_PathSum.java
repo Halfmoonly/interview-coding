@@ -14,7 +14,7 @@ import org.lyflexi.solutions.TreeNode.structDef.TreeNode;
 叶子节点 是指没有子节点的节点。
 *
 * */
-public class Solution12_HasPathSum {
+public class Solution12_PathSum {
     public boolean hasPathSum(TreeNode root, int sum) {
         if (root == null) {
             return false;
