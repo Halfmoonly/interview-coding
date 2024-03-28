@@ -22,7 +22,7 @@ import java.util.List;
 输出：[[3],[20,9],[15,7]]
 
 * */
-public class Solution09_ZigzagLevelOrder {
+public class Solution06_ZigzagLevelOrder {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> answer = new ArrayList<>();
         LinkedList<TreeNode> queue = new LinkedList<>();

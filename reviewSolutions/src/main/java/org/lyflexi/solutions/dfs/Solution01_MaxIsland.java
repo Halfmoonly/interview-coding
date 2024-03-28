@@ -31,6 +31,7 @@ public class Solution01_MaxIsland {
         return ans;
     }
 
+    //完整的一个岛屿面积
     public static int dfs(int[][] grid, int cur_i, int cur_j) {
         if (cur_i < 0 || cur_j < 0 || cur_i == grid.length || cur_j == grid[0].length || grid[cur_i][cur_j] != 1) {
             return 0;

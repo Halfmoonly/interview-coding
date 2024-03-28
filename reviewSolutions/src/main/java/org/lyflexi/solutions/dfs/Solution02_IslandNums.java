@@ -46,10 +46,12 @@ public class Solution02_IslandNums {
         return ans;
     }
 
+    //完整的一个岛屿面积
     public static int dfs(char[][] grid, int cur_i, int cur_j) {
         if (cur_i < 0 || cur_j < 0 || cur_i == grid.length || cur_j == grid[0].length || grid[cur_i][cur_j] != '1') {
             return 0;
         }
+        //访问过及时置为0
         grid[cur_i][cur_j] = 0;
         int[] di = { 0, 0, 1, -1 };
         int[] dj = { 1, -1, 0, 0 };
@@ -61,7 +63,7 @@ public class Solution02_IslandNums {
         return ans;
     }
 
-    // 深度优先遍历，栈
+    // 深度优先遍历，栈，栈的本质就是模拟了递归
     // public int numIslands(char[][] grid) {
     // int ans = 0;
     // for (int i = 0; i != grid.length; ++i) {

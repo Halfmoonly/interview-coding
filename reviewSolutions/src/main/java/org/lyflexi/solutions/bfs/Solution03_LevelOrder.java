@@ -31,7 +31,7 @@ import java.util.List;
 输出：[]
 *
 * */
-public class Solution04_LevelOrder {
+public class Solution03_LevelOrder {
     public List<List<Integer>> levelOrder(TreeNode root) {
 
         if (root==null){

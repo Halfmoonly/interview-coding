@@ -28,7 +28,7 @@ import java.util.List;
 输入: []
 输出: []
 * */
-public class Solution08_RightSideView {
+public class Solution05_RightSideView {
     public List<Integer> rightSideView(TreeNode root) {
         if (root==null){
             return new ArrayList<>();

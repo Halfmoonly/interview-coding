@@ -22,7 +22,7 @@ import java.util.LinkedList;
 输出：4
 解释：最大宽度出现在树的第 3 层，宽度为 4 (5,3,null,9) 。
 * */
-public class Solution11_MaxWidthHasNull {
+public class Solution07_MaxWidthHasNull {
     public int widthOfBinaryTree(TreeNode root) {
         if (root==null){
             return 0;

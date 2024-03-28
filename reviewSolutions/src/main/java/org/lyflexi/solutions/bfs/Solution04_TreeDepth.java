@@ -16,7 +16,7 @@ LCR 175. 计算二叉树的深度
 *
 *
 * */
-public class Solution05_TreeDepth {
+public class Solution04_TreeDepth {
 
 
     //用队列实现广度优先遍历
