@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.sortalgorithm;
+package org.lyflexi.solutions.rank;
 
 import java.util.*;
 

@@ -1,11 +1,11 @@
-package org.lyflexi.solutions;
+package org.lyflexi.solutions.queuestack;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
 
-public class Extra09_MarkdownParser {
+public class Solution05_MarkdownParser {
     public static void main(String[] args) {
 //        String mdText = "# 1Title\n## 2title\n#### 4title\n### 3title\n## 2subtitle\n# 1Title";
         String mdText = "# Title\n## Subtitle\n### Subsubtitle\n## Another subtitle\n# Another Title";

@@ -1,4 +1,4 @@
-package org.lyflexi.solutions;
+package org.lyflexi.solutions.queuestack;
 
 import java.util.LinkedList;
 
@@ -17,10 +17,10 @@ int pop() 移除并返回栈顶元素。
 int top() 返回栈顶元素。
 boolean empty() 如果栈是空的，返回 true ；否则，返回 false 。
 * */
-public class Extra07_QueueToStack {
+public class Solution03_QueueToStack {
 
     public LinkedList<Integer> queue;
-    public Extra07_QueueToStack() {
+    public Solution03_QueueToStack() {
         queue = new LinkedList();
     }
 

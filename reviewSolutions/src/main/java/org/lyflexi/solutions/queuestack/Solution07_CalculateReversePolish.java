@@ -1,4 +1,4 @@
-package org.lyflexi.solutions;
+package org.lyflexi.solutions.queuestack;
 
 import java.util.LinkedList;
 
@@ -46,7 +46,7 @@ import java.util.LinkedList;
 = 22
 
 * */
-public class Extra11_CalculateReversePolish {
+public class Solution07_CalculateReversePolish {
     public int evalRPN(String[] tokens) {
         LinkedList<Integer> stack = new LinkedList<>();
         for (String item:tokens){

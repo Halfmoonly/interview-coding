@@ -1,4 +1,4 @@
-package org.lyflexi.solutions;
+package org.lyflexi.solutions.queuestack;
 
 import java.util.Stack;
 
@@ -6,10 +6,10 @@ import java.util.Stack;
  * @Author: ly
  * @Date: 2024/2/16 16:02
  */
-public class Extra08_StackToQueue {
+public class Solution04_StackToQueue {
     Stack<Integer> stack;
 
-    public Extra08_StackToQueue() {
+    public Solution04_StackToQueue() {
         stack = new Stack<>();
 
     }

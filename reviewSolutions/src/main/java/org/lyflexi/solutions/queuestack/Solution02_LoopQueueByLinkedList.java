@@ -1,4 +1,4 @@
-package org.lyflexi.solutions;
+package org.lyflexi.solutions.queuestack;
 
 import org.lyflexi.structDef.ListNode;
 
@@ -10,7 +10,7 @@ import org.lyflexi.structDef.ListNode;
 /*
 622. 设计循环队列
 使用链表去实现循环队列十分简单，因为链表天然就是无限增长的，无需在设计层面考虑循环*/
-public class Extra06_LoopQueueByLinkedList {
+public class Solution02_LoopQueueByLinkedList {
     ListNode front;
     ListNode rear;
 
@@ -18,7 +18,7 @@ public class Extra06_LoopQueueByLinkedList {
 
     int curSize = 0;//链表实现队列想要判满，只能是创建变量记录当前队列的大小
 
-    public Extra06_LoopQueueByLinkedList(int k) {
+    public Solution02_LoopQueueByLinkedList(int k) {
         this.capacity = k;
     }
 
