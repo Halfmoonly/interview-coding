@@ -13,18 +13,19 @@ package org.lyflexi.solutions;
  */
 public class Extra05_HSBC_GCD {
     public static void main(String[] args) {
-        int gcd = gcd(4, 2);
+        int gcd = gcdV2(4, 2);
         System.out.println(gcd);
 
     }
 
     /**
+     * 辗转相除法
      * 默认a>b
      * @param a
      * @param b
      * @return
      */
-    private static int gcd(int a, int b) {
+    private static int gcdV1(int a, int b) {
         if (b == 0) {
             return a;
         }
@@ -34,5 +35,19 @@ public class Extra05_HSBC_GCD {
             b = mod;
         }
         return a;
+    }
+
+    /**
+     * 递归求gcd
+     * @param a
+     * @param b
+     * @return
+     */
+    public static int gcdV2(int a, int b) {
+        if (b == 0) {
+            return a;
+        } else {
+            return gcdV2(b, a % b);
+        }
     }
 }

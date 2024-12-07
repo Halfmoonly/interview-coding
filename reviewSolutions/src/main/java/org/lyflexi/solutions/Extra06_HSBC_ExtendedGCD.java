@@ -40,6 +40,7 @@ public class Extra06_HSBC_ExtendedGCD {
      */
     private static int[] extendedGCD(int a, int b) {
         if (b == 0) {
+            //虽然作为递归出口，但是{a,1,0}并不具备一般意义，因此下文递归之后仍然需要继续推导
             return new int[]{a,1,0};
         }
         int[] gcdR = extendedGCD(b, a % b);
