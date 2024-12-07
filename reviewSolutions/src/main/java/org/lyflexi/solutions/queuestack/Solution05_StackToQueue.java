@@ -6,10 +6,10 @@ import java.util.Stack;
  * @Author: ly
  * @Date: 2024/2/16 16:02
  */
-public class Solution04_StackToQueue {
+public class Solution05_StackToQueue {
     Stack<Integer> stack;
 
-    public Solution04_StackToQueue() {
+    public Solution05_StackToQueue() {
         stack = new Stack<>();
 
     }

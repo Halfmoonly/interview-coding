@@ -17,10 +17,10 @@ int pop() 移除并返回栈顶元素。
 int top() 返回栈顶元素。
 boolean empty() 如果栈是空的，返回 true ；否则，返回 false 。
 * */
-public class Solution03_QueueToStack {
+public class Solution04_QueueToStack {
 
     public LinkedList<Integer> queue;
-    public Solution03_QueueToStack() {
+    public Solution04_QueueToStack() {
         queue = new LinkedList();
     }
 
