@@ -7,15 +7,13 @@ package org.lyflexi.solutions;
  * @Date: 2024/12/7 16:46
  */
 
-import java.util.Arrays;
-
 /**
  * 求解最大公约数, 同时计算出满足如下等式的系数x,y
  * ax+by = gcd
  *
- * 递归
+ * 递归+递推！光有递归还不行，还要赋予其数学推导的语义
  */
-public class Extra06_ExtendedGCD {
+public class Extra06_HSBC_ExtendedGCD {
     public static void main(String[] args) {
         int[] gcdArray = extendedGCD(21, 14);
         for (int v : gcdArray) {

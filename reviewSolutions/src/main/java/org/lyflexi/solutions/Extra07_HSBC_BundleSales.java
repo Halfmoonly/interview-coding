@@ -11,6 +11,8 @@ import java.util.Scanner;
 
 /**
  * Question
+ * 捆绑销售
+ *
  * <p>
  * josh went to the market to buy appies. He found two shops A and B that sold apples in lots .
  * He can bny any number of completed lots but he cannot buy loose apples .
@@ -35,7 +37,7 @@ import java.util.Scanner;
  * output:
  * 65
  */
-public class Extra07_HSBC {
+public class Extra07_HSBC_BundleSales {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 

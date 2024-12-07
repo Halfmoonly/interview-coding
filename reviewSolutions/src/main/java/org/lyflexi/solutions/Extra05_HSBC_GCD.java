@@ -11,7 +11,7 @@ package org.lyflexi.solutions;
  * 求解最大公约数
  * 辗转相除法
  */
-public class Extra05_GCD {
+public class Extra05_HSBC_GCD {
     public static void main(String[] args) {
         int gcd = gcd(4, 2);
         System.out.println(gcd);

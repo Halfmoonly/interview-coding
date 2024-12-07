@@ -51,6 +51,8 @@ import java.util.Scanner;
 
 
 /*Question: 中文
+* 点位逆转：
+*
 * 目前选择的编程语言是Java。我们强调提交一个完全工作的代码，而不是部分正确但有效的代码。一旦提交，您就不能再检查这个问题。您可以使用系统输出来调试代码。在语法/运行时错误的情况下，System.out.printin可能无法工作。使用的JDK版本为1.8。注意：主类名称必须为“Solution”。
 *
 * 埃玛想给她父亲一束花作为生日礼物。她向母亲露丝寻求帮助。
@@ -77,7 +79,7 @@ import java.util.Scanner;
 *
 * 解释：Emma必须按照长度递增的顺序排列前三个花柱，其余的花柱按照长度递减的顺序排列。花束中花茎的最后顺序是[5,7,11, 46,23, 16, 10, 8]。
 * */
-public class Solution06_HSBC {
+public class Solution06_HSBC_PReverse {
 
     private static int[] funcBouquet(int[] flowerStick, int k){
         int len = flowerStick.length;
