@@ -70,6 +70,18 @@ public class Extra07_HSBC_BundleSales {
      * @return
      */
     private static int minPriceV1(int num, int appleShop1, int priceShop1, int appleShop2, int priceShop2) {
+        // 边界处理
+        if (num == 0){
+            return 0;//0成本
+        }
+        if (num < 0 || appleShop1 < 0 || priceShop1 < 0 || appleShop2 < 0 || priceShop2 < 0) {
+            return -1; // or throw an exception, depending on your design choice
+        }
+        if (num % gcd(appleShop1, appleShop2) != 0) {
+            return -1; // Ensure that the total number of apples can be bought with the given lots
+        }
+
+
         // 策略3：Ensure that appleShop1*priceShop1 is not greater than appleShop2*priceShop2 for simpler iteration logic
         if (appleShop1 * priceShop1 > appleShop2 * priceShop2) {
             int tempApple = appleShop1;
@@ -98,6 +110,19 @@ public class Extra07_HSBC_BundleSales {
             }
         }
         return minCost;
+    }
+
+    /**
+     * 求解最大公约数, 默认a>b
+     * @param a
+     * @param b
+     * @return
+     */
+    private static int gcd(int a, int b) {
+        if(b == 0){
+            return a;
+        }
+        return gcd(b, a % b);
     }
 
     /**
