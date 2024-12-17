@@ -8,11 +8,11 @@
         <version>3.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.lyflexi</groupId>
-    <artifactId>foreign-company-interview</artifactId>
+    <groupId>com.hm</groupId>
+    <artifactId>leetcode-easy</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>foreign-company-interview</name>
-    <description>foreign-company-interview</description>
+    <name>leetcode-easy</name>
+    <description>leetcode-easy</description>
     <url/>
     <licenses>
         <license/>
