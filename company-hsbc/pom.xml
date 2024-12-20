@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.lyflexi</groupId>
-    <artifactId>foreign-company-interview</artifactId>
+    <artifactId>company-hsbc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>foreign-company-interview</name>
-    <description>foreign-company-interview</description>
+    <name>company-hsbc</name>
+    <description>company-hsbc</description>
     <url/>
     <licenses>
         <license/>
