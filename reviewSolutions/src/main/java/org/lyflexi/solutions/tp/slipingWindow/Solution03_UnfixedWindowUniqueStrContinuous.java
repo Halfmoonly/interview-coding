@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.dPointer.slipingWindow;
+package org.lyflexi.solutions.tp.slipingWindow;
 
 import java.util.*;
 

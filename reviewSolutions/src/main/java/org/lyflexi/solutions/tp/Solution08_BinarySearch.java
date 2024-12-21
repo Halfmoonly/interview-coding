@@ -1,4 +1,4 @@
-package org.lyflexi.solutions.dPointer;
+package org.lyflexi.solutions.tp;
 
 import java.util.Arrays;
 import java.util.Scanner;
