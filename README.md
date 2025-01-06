@@ -15,7 +15,7 @@
 7. 栈Stack push/pop
 8. 队列Queue offer/poll
 9. 动态规划dp 推导转移方程并填充dp[]数组
-10. 树节点三叉戟 递归遍历/层序遍历/BST叶子插入
+10. 树节点三叉戟 递归遍历/层序遍历/BST必然叶子插入/BTS按出度0|1|2删除算法
 11. 广度优先bfs 层序遍历
 12. 深度优先dfs 树递归遍历
 13. 堆 PriorityQueue
