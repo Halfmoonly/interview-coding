@@ -51,3 +51,13 @@
     3. `offer/poll`
 12. 动态规划dp
     1. 推导转移方程并填充 `dp[]`数组
+
+
+
+---
+
+
+
+> Reference and Recommend hello-algo By krahets：https://www.hello-algo.com/en
+>
+> GitHub：https://github.com/krahets/hello-algo
