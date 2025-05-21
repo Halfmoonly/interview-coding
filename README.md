@@ -25,7 +25,7 @@
 
 In Example One, visiting each node starts a "trial". And passing a leaf node or the `return` statement to going back to the parent node suggests "retreat".
 
-- 寻解trial，基于递归函数的共享状态变量，如当前路径 `path:List<TreeNode>`收集当前状态的答案。注意结果集 `res: List<List<TreeNode>>` 并不属于trial
+- 寻解trial，基于递归函数的共享状态变量 `state `，如当前路径  `path:List<TreeNode>`收集当前状态的答案。注意结果集 `res: List<List<TreeNode>````>` 并不属于trial
 - 回溯retreat，伴随着向上归的动作中复原当前状态state，一般回溯retreat语句位于程序末尾
 - 剪枝prune，通过return提前返回程序剪掉下面的枝叶，属于优化性能的手段。要注意剪枝语句return和trial语句的相对位置，但当trial语句在return语句之前，return之前必须再次retreat，因为提前trial了节点信息。当trial语句在return语句之后，那就没必要在return之前二次retreat
 
