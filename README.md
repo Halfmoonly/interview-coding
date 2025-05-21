@@ -83,7 +83,6 @@ In Example One, visiting each node starts a "trial". And passing a leaf node or 
 
 * 推导转移方程并填充 `dp[]`数组
 
-
 ## 框架篇
 
 回溯框架1：
@@ -105,13 +104,14 @@ void backtrack(State state, List<Choice> choices, List<State> res) {
     // Iterate through all choices
     for (Choice choice : choices) {
         // Prune: check if the choice is valid
-        if (isValid(state, choice)) {
-            // Trial: make a choice, update the state
-            makeChoice(state, choice);
-            backtrack(state, choices, res);
-            // Retreat: undo the choice, revert to the previous state
-            undoChoice(state, choice);
+        if (!isValid(state, choice)) {
+	    continue;
         }
+        // Trial: make a choice, update the state
+        makeChoice(state, choice);
+        backtrack(state, choices, res);
+        // Retreat: undo the choice, revert to the previous state
+        undoChoice(state, choice);
     }
 }
 ```
@@ -132,16 +132,17 @@ void backtrack(List<Integer> state, int[] choices, boolean[] selected, List<List
     for (int i = 0; i < choices.length; i++) {
         int choice = choices[i];
         // Pruning: do not allow repeated selection of elements
-        if (!selected[i]) {
-            // Attempt: make a choice, update the state
-            selected[i] = true;
-            state.add(choice);
-            // Proceed to the next round of selection
-            backtrack(state, choices, selected, res);
-            // Retract: undo the choice, restore to the previous state
-            selected[i] = false;
-            state.remove(state.size() - 1);
+        if (selected[i]) {
+	    continue;
         }
+        // Attempt: make a choice, update the state
+        selected[i] = true;
+        state.add(choice);
+        // Proceed to the next round of selection
+        backtrack(state, choices, selected, res);
+        // Retract: undo the choice, restore to the previous state
+        selected[i] = false;
+        state.remove(state.size() - 1);
     }
 }
 
@@ -175,18 +176,19 @@ void backtrack(List<Integer> state, int[] choices, boolean[] selected, List<List
     for (int i = 0; i < choices.length; i++) {
         int choice = choices[i];
         // Pruning: do not allow repeated selection of elements and do not allow repeated selection of equal elements
-        if (!selected[i] && !duplicated.contains(choice)) {
-            // Attempt: make a choice, update the state
-	    // 由于递归回溯时会返回到上一级，而上一级别有自己的 duplicated 集合，因此不需要从duplicated集合中移除元素。对duplicated来说不用回溯retreat
-            duplicated.add(choice); // Record selected element values
-            selected[i] = true;
-            state.add(choice);
-            // Proceed to the next round of selection
-            backtrack(state, choices, selected, res);
-            // Retract: undo the choice, restore to the previous state
-            selected[i] = false;
-            state.remove(state.size() - 1);
+        if (selected[i] || duplicated.contains(choice)) {
+	    continue;
         }
+        // Attempt: make a choice, update the state
+	// 由于递归回溯时会返回到上一级，而上一级别有自己的 duplicated 集合，因此不需要从duplicated集合中移除元素。对duplicated来说不用回溯retreat
+        duplicated.add(choice); // Record selected element values
+        selected[i] = true;
+        state.add(choice);
+        // Proceed to the next round of selection
+        backtrack(state, choices, selected, res);
+        // Retract: undo the choice, restore to the previous state
+        selected[i] = false;
+        state.remove(state.size() - 1);
     }
 }
 
