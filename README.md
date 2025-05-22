@@ -20,7 +20,7 @@
 - 属于“自上而下”的解决问题，由大到小拆解问题递归三要素，终止条件、递归调用（子问题）、返回结果（归）
 - 当递归函数有返回值，子递归调用必须return，请注意这有别于终止条件的返回
 - 当递归函数无返回值，收集结果（归）应当在递归参数当中体现
-- 禁止自增自减++--，即使不是引用变量，比如++k/k++操作，会导致当前递归层状态丢失。正确的传参姿势是k-1/k+1
+- 禁止状态变量的自增自减++--或者v=v+n或者v=v-n，即使v不是引用变量。因为会导致本来修改后的状态变量值按理是要传递给下一层递归的，结果在传递之前你把上一层（当前层）的状态变量也给修改了。正确的传参姿势是v-1/v+1
 - 禁止定义局部变量，由于反复递归导致局部变量被反复初始化，最终局部变量将毫无意义
 
 回溯问题 `BackTracking`
@@ -30,7 +30,7 @@ In Example One, visiting each node starts a "trial". And passing a leaf node or 
 - 寻解trial，基于递归函数的共享状态变量 `state `，如当前路径  `path:List<TreeNode>`收集当前状态的答案。注意结果集 `res: List<List<TreeNode>````>` 并不属于trial
 - 回溯retreat，伴随着向上归的动作中复原当前状态state，一般回溯retreat语句位于程序末尾
 - 剪枝prune，通过return提前返回程序剪掉下面的枝叶，属于优化性能的手段。要注意剪枝语句return和trial语句的相对位置，但当trial语句在return语句之前，return之前必须再次retreat，因为提前trial了节点信息。当trial语句在return语句之后，那就没必要在return之前二次retreat
-- 经典应用场景有dfs，permutation
+- 经典应用场景有二叉树dfs，全排列permutation，子集和subSetSum
 
 链表迭代 `Listnode`
 
@@ -85,7 +85,7 @@ In Example One, visiting each node starts a "trial". And passing a leaf node or 
 
 ## 框架篇
 
-回溯框架1：
+回溯框架0：
 
 - state，是trial共享待回溯变量，如共享路径变量
 - choices，是输入集合，如树节点集合集合
@@ -105,7 +105,7 @@ void backtrack(State state, List<Choice> choices, List<State> res) {
     for (Choice choice : choices) {
         // Prune: check if the choice is valid
         if (!isValid(state, choice)) {
-	    continue;
+	    continue/break;
         }
         // Trial: make a choice, update the state
         makeChoice(state, choice);
@@ -116,7 +116,7 @@ void backtrack(State state, List<Choice> choices, List<State> res) {
 }
 ```
 
-回溯框架2：全排列
+回溯框架1：全排列
 
 - 求解不含重复数字的输入数组的所有 **不重复全排列**
 
@@ -154,7 +154,7 @@ List<List<Integer>> permutationsI(int[] nums) {
 }
 ```
 
-回溯框架3：全排列Ⅱ
+回溯框架2：全排列Ⅱ
 
 - 求解包含重复数字的输入数组的所有 **不重复全排列**
 
@@ -196,6 +196,54 @@ void backtrack(List<Integer> state, int[] choices, boolean[] selected, List<List
 List<List<Integer>> permutationsII(int[] nums) {
     List<List<Integer>> res = new ArrayList<List<Integer>>();
     backtrack(new ArrayList<Integer>(), nums, new boolean[nums.length], res);
+    return res;
+}
+```
+
+回溯框架3：子集和问题
+
+- 给定一个正整数nums数组和一个目标正整数目标，找到所有可能的组合，使得组合中元素的总和等于目标。给定的数组没有重复的元素，每个元素可以多次选择。
+
+To implement this pruning, given the input array [x1,x2,…,xn], the choice sequence in the search process should be [x(i1),x(i2),…,x(im)], which needs to satisfy i1≤i2≤⋯≤im.  **Any choice sequence that does not meet this condition will cause duplicates and should be pruned** .
+
+So we initialize the variable `start`, which indicates the starting index point for traversal.  **After making the choice xi, set the next round to start from index  i** . This will ensure the choice sequence satisfies i1≤i2≤⋯≤im, thereby ensuring the uniqueness of the subsets.
+
+* **Before starting the search, must sort the array `nums`.**
+* In the traversal of all choices, **end the loop directly when the subset sum exceeds `target`** , as subsequent elements are larger and their subset sum will definitely exceed `target`.
+* Eliminate the element sum variable `total`,  **by performing subtraction on `target` to count the element sum** . When `target` equals 0, record the solution.This way, one function parameter "total" can be omitted
+
+```java
+/* Backtracking algorithm: Subset Sum I */
+void backtrack(List<Integer> state, int target, int[] choices, int start, List<List<Integer>> res) {
+    // When the subset sum equals target, record the solution
+    if (target == 0) {
+        res.add(new ArrayList<>(state));
+        return;
+    }
+    // Traverse all choices
+    // Pruning two: start traversing from start to avoid generating duplicate subsets
+    for (int i = start; i < choices.length; i++) {
+        // Pruning one: if the subset sum exceeds target, end the loop immediately
+        // This is because the array is sorted, and later elements are larger, so the subset sum will definitely exceed target
+        if (target - choices[i] < 0) {
+            break;
+        }
+        // Attempt: make a choice, update target, start
+        state.add(choices[i]);
+        // Proceed to the next round of selection
+        backtrack(state, target - choices[i], choices, i, res);
+        // Retract: undo the choice, restore to the previous state
+        state.remove(state.size() - 1);
+    }
+}
+
+/* Solve Subset Sum I */
+List<List<Integer>> subsetSumI(int[] nums, int target) {
+    List<Integer> state = new ArrayList<>(); // State (subset)
+    Arrays.sort(nums); // Sort nums
+    int start = 0; // Start point for traversal
+    List<List<Integer>> res = new ArrayList<>(); // Result list (subset list)
+    backtrack(state, target, nums, start, res);
     return res;
 }
 ```
