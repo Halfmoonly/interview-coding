@@ -160,8 +160,8 @@ List<List<Integer>> permutationsI(int[] nums) {
 
 Although both `selected` and `duplicated` serve as pruning mechanisms, they target different issues:
 
-* **Repeated-choice pruning** (via `selected`): There is a single `selected` array for the entire search, indicating which elements are already in the current state纵向. This prevents the same element from appearing more than once in `state`.
-* **Equal-element pruning** (via `duplicated`): Each call to the `backtrack` function uses its own `duplicated` set横向, recording which elements have already been chosen in that specific iteration (`for` loop). This ensures that equal elements are selected only once per round of choices.
+* **Repeated-choice pruning** (via `selected`): There is a single `selected` array for the entire search, indicating which elements are already in the current state纵向剪枝. This prevents the same element from appearing more than once in `state`.
+* **Equal-element pruning** (via `duplicated`): Each call to the `backtrack` function uses its own `duplicated` set横向剪枝, recording which elements have already been chosen in that specific iteration (`for` loop). This ensures that equal elements are selected only once per round of choices.
 
 ```java
 /* Backtracking algorithm: Permutation II */
