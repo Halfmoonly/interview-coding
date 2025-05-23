@@ -231,7 +231,7 @@ void backtrack(List<Integer> state, int target, int[] choices, int start, List<L
         // Attempt: make a choice, update target, start
         state.add(choices[i]);
         // Proceed to the next round of selection
-        backtrack(state, target - choices[i], choices, i, res);
+        backtrack(state, target - choices[i], choices, i, res);//下次的start还可以是i，因为元素可以重复选择
         // Retract: undo the choice, restore to the previous state
         state.remove(state.size() - 1);
     }
@@ -281,7 +281,7 @@ void backtrack(List<Integer> state, int target, int[] choices, int start, List<L
         state.add(choices[i]);
         // Proceed to the next round of selection
 	// Pruning three: start traversing from start（i+1） to avoid repeatedly selecting the same element
-        backtrack(state, target - choices[i], choices, i + 1, res);
+        backtrack(state, target - choices[i], choices, i + 1, res);//下次的start不可以是i，因为元素不可以重复选择了
         // Retract: undo the choice, restore to the previous state
         state.remove(state.size() - 1);
     }
