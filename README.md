@@ -200,7 +200,7 @@ List<List<Integer>> permutationsII(int[] nums) {
 }
 ```
 
-回溯框架3：子集和问题
+回溯框架3：子集和问题Ⅰ
 
 - 给定一个正整数nums数组和一个目标正整数目标，找到所有可能的组合，使得组合中元素的总和等于目标。给定的数组没有重复的元素，每个元素可以多次选择。
 
@@ -239,6 +239,56 @@ void backtrack(List<Integer> state, int target, int[] choices, int start, List<L
 
 /* Solve Subset Sum I */
 List<List<Integer>> subsetSumI(int[] nums, int target) {
+    List<Integer> state = new ArrayList<>(); // State (subset)
+    Arrays.sort(nums); // Sort nums
+    int start = 0; // Start point for traversal
+    List<List<Integer>> res = new ArrayList<>(); // Result list (subset list)
+    backtrack(state, target, nums, start, res);
+    return res;
+}
+```
+
+回溯框架4：子集和问题Ⅱ
+
+- 给定一个正整数nums数组和一个目标正整数目标，找到所有可能的组合，使得组合中元素的总和等于目标。给定的数组可能包含重复的元素，每个元素只能选择一次。请将这些组合作为列表返回，该列表不应包含重复的组合。
+
+Compared to the previous question,  **this question's input array may contain duplicate elements** , introducing new problems. For example, given the array [4,4^,5] and target element 9, the existing code's output results in [4,5],[4^,5], resulting in duplicate subsets.
+
+- To solve this issue,  **we need to limit equal elements to being chosen only once per round** . The implementation is quite clever: since the array is sorted, equal elements are adjacent. This means that in a certain round of choices, if the current element is equal to its left-hand element, it means it has already been chosen, so skip the current element directly（横向剪枝）.
+- At the same time,  **this question stipulates that each array element can only be chosen once** . Fortunately, we can also use the variable `start` to meet this constraint: after making the choice xi, set the next round to start from index i+1 going forward. This not only eliminates duplicate subsets but also avoids repeated selection of elements.
+
+```java
+/* Backtracking algorithm: Subset Sum II */
+void backtrack(List<Integer> state, int target, int[] choices, int start, List<List<Integer>> res) {
+    // When the subset sum equals target, record the solution
+    if (target == 0) {
+        res.add(new ArrayList<>(state));
+        return;
+    }
+    // Traverse all choices
+    // Pruning two: start traversing from start to avoid generating duplicate subsets
+    for (int i = start; i < choices.length; i++) {
+        // Pruning one: if the subset sum exceeds target, end the loop immediately
+        // This is because the array is sorted, and later elements are larger, so the subset sum will definitely exceed target
+        if (target - choices[i] < 0) {
+            break;
+        }
+        // Pruning four: if the element equals the left element, it indicates that the search branch is repeated, skip it
+        if (i > start && choices[i] == choices[i - 1]) {
+            continue;
+        }
+        // Attempt: make a choice, update target, start
+        state.add(choices[i]);
+        // Proceed to the next round of selection
+	// Pruning three: start traversing from start（i+1） to avoid repeatedly selecting the same element
+        backtrack(state, target - choices[i], choices, i + 1, res);
+        // Retract: undo the choice, restore to the previous state
+        state.remove(state.size() - 1);
+    }
+}
+
+/* Solve Subset Sum II */
+List<List<Integer>> subsetSumII(int[] nums, int target) {
     List<Integer> state = new ArrayList<>(); // State (subset)
     Arrays.sort(nums); // Sort nums
     int start = 0; // Start point for traversal
