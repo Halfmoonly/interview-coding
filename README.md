@@ -160,8 +160,8 @@ List<List<Integer>> permutationsI(int[] nums) {
 
 Although both `selected` and `duplicated` serve as pruning mechanisms, they target different issues:
 
-* **Repeated-choice pruning** (via `selected`): There is a single `selected` array for the entire search, indicating which elements are already in the current state纵向剪枝. This prevents the same element from appearing more than once in `state`.
-* **Equal-element pruning** (via `duplicated`): Each call to the `backtrack` function uses its own `duplicated` set横向剪枝, recording which elements have already been chosen in that specific iteration (`for` loop). This ensures that equal elements are selected only once per round of choices.
+* **Repeated-choice pruning** (via `selected`): There is a single `selected` array for the entire search, indicating which elements are already in the current state. This prevents the same element from appearing more than once in `state`.（纵向剪枝）
+* **Equal-element pruning** (via `duplicated`): Each call to the `backtrack` function uses its own `duplicated` set, recording which elements have already been chosen in that specific iteration (`for` loop). This ensures that equal elements are selected only once per round of choices.（横向剪枝）
 
 ```java
 /* Backtracking algorithm: Permutation II */
@@ -252,10 +252,15 @@ List<List<Integer>> subsetSumI(int[] nums, int target) {
 
 - 给定一个正整数nums数组和一个目标正整数目标，找到所有可能的组合，使得组合中元素的总和等于目标。给定的数组可能包含重复的元素，每个元素只能选择一次。请将这些组合作为列表返回，该列表不应包含重复的组合。
 
-Compared to the previous question,  **this question's input array may contain duplicate elements** , introducing new problems. For example, given the array [4,4^,5] and target element 9, the existing code's output results in [4,5],[4^,5], resulting in duplicate subsets.
+Compared to the previous question,  **this question's input array may contain duplicate elements** , introducing new problems. For example, given the array [4,4^,5] and target element 8, the first round code's output results in [4,4],[4,4^], resulting in duplicate subsets , the second round code's output results in [4^,4],[4^,4^], also resulting in duplicate subsets. To solve this issue
 
-- To solve this issue,  **we need to limit equal elements to being chosen only once per round** . The implementation is quite clever: since the array is sorted, equal elements are adjacent. This means that in a certain round of choices, if the current element is equal to its left-hand element, it means it has already been chosen, so skip the current element directly（横向剪枝）.
-- At the same time,  **this question stipulates that each array element can only be chosen once** . Fortunately, we can also use the variable `start` to meet this constraint: after making the choice xi, set the next round to start from index i+1 going forward. This not only eliminates duplicate subsets but also avoids repeated selection of elements.
+- **Each array element can only be chosen once** . Fortunately, we can also use the variable `start` to meet this constraint: after making the choice xi, set the next round to start from index i+1 going forward.  [4,4],[4,4^],[4^,4],[4^,4^]->[4,4^],[4^,4]（纵向剪枝）
+- **Another, equal elements could be chosen, but we need to limit equal elements to being chosen only once per round** . The implementation is quite clever: since the array is sorted, equal elements are adjacent. This means that in a certain round of choices, if the current element is equal to its left-hand element, it means it has already been chosen, so skip the current element directly.[4,4^],[4^,4]->[4,4^]（横向剪枝）
+
+为什么 `i > start` 才能够判断同一层的重复项？当你在某一层开始遍历（比如 `start = 0`），你可能会遇到多个连续相同的元素。假设这些元素是从索引 `start` 开始的：
+
+* 对于第一个元素（`i == start`），你总是会尝试将其加入到当前状态中，因为它代表了该层（俯瞰整个树结构的某一层）首次遇到该值的机会。**所以只要是在递归调用之前的程序代码都属于当前层，递归调用代码行说明准备进入下一层，递归调用之后的程序代码是回溯说明要返回上一层**
+* 如果接下来的元素与前一个相同（即 `choices[i] == choices[i - 1]`），并且 `i > start`，这表明你已经在当前层尝试过这个值了。因此，为了避免产生重复组合，你应该跳过这次尝试。
 
 ```java
 /* Backtracking algorithm: Subset Sum II */
@@ -274,6 +279,8 @@ void backtrack(List<Integer> state, int target, int[] choices, int start, List<L
             break;
         }
         // Pruning four: if the element equals the left element, it indicates that the search branch is repeated, skip it
+	// 对于root.mid, 要求当root.mid.val==root.left.val的时候直接剪掉
+	// 所以这个判断必须保留 i > start只剪同一层即不同分支的重复项（同层代表着回溯后的递归），允许不同层选相同值（不同层代表的是回溯前的递归）。
         if (i > start && choices[i] == choices[i - 1]) {
             continue;
         }
