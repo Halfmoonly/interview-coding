@@ -259,7 +259,7 @@ Compared to the previous question,  **this question's input array may contain du
 
 为什么 `i > start` 才能够判断同一层的重复项？当你在某一层开始遍历（比如 `start = 0`），你可能会遇到多个连续相同的元素。假设这些元素是从索引 `start` 开始的：
 
-* 对于第一个元素（`i == start`），你总是会尝试将其加入到当前状态中，因为它代表了该层（俯瞰整个树结构的某一层）首次遇到该值的机会。**所以只要是在递归调用之前的程序代码都属于当前层，递归调用代码行说明准备进入下一层，递归调用之后的程序代码是回溯说明要返回上一层**
+* 对于第一个元素（`i == start`），你总是会尝试将其加入到当前状态中，因为它代表了该层（俯瞰整个树结构的某一层）首次遇到该值的机会。**所以只要是在递归调用之前的程序代码都属于当前层，递归调用代码所在行说明准备进入下一层，递归调用之后的程序代码是回溯说明要返回上一层**
 * 如果接下来的元素与前一个相同（即 `choices[i] == choices[i - 1]`），并且 `i > start`，这表明你已经在当前层尝试过这个值了。因此，为了避免产生重复组合，你应该跳过这次尝试。
 
 ```java
@@ -280,7 +280,8 @@ void backtrack(List<Integer> state, int target, int[] choices, int start, List<L
         }
         // Pruning four: if the element equals the left element, it indicates that the search branch is repeated, skip it
 	// 对于root.mid, 要求当root.mid.val==root.left.val的时候直接剪掉
-	// 所以这个判断必须保留 i > start只剪同一层即不同分支的重复项（同层代表着回溯后的递归），允许不同层选相同值（不同层代表的是回溯前的递归）。
+	// 所以这个判断必须保留 i > start只剪同一层即不同分支的重复项（只要是在递归调用之前的程序代码都属于当前层），
+	// 允许不同层选相同值（递归调用代码所在行说明准备进入下一层，前后两次递归说明是相邻层，相邻层允许不选相同值）
         if (i > start && choices[i] == choices[i - 1]) {
             continue;
         }
