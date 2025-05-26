@@ -281,7 +281,7 @@ void backtrack(List<Integer> state, int target, int[] choices, int start, List<L
         // Pruning four: if the element equals the left element, it indicates that the search branch is repeated, skip it
 	// 对于root.mid, 要求当root.mid.val==root.left.val的时候直接剪掉
 	// 所以这个判断必须保留 i > start只剪同一层即不同分支的重复项（只要是在递归调用之前的程序代码都属于当前层），
-	// 允许不同层选相同值（递归调用代码所在行说明准备进入下一层，前后两次递归说明是相邻层，相邻层允许不选相同值）
+	// 允许不同层选相同值（递归调用代码所在行说明准备进入下一层，前后两次递归说明是相邻层，相邻层允许选相同值）
         if (i > start && choices[i] == choices[i - 1]) {
             continue;
         }
