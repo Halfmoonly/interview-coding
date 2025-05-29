@@ -86,6 +86,8 @@ In Example One, visiting each node starts a "trial". And passing a leaf node or 
 
 * 推导转移方程并填充 `dp[]`数组
 
+### 排序问题 `Sorting`
+
 ## 框架篇
 
 ### 回溯框架
