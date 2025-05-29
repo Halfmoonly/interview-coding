@@ -6,16 +6,19 @@
 
 ## 核心篇
 
-分支判断
+### 分支判断
 
-* 卫语句
-  * 优先考虑失败、异常、中断、退出等直接返回的情况。
-  * if条件尽可能变得简短，这样else也会更加清晰，除非你清楚所有的可能性
-* 德摩根定律
-  * `if/while(b1||b2||b3) + if/while(!b1&&!b2&&!b3) == 1`
-  * `if/while(b1&&b2&&b3) + if/while(!b1||!b2||!b3) == 1`
+卫语句
 
-递归问题 `Recursion`
+* 优先考虑失败、异常、中断、退出等直接返回的情况。
+* if条件尽可能变得简短，这样else也会更加清晰，除非你清楚所有的可能性
+
+德摩根定律
+
+* `if/while(b1||b2||b3) + if/while(!b1&&!b2&&!b3) == 1`
+* `if/while(b1&&b2&&b3) + if/while(!b1||!b2||!b3) == 1`
+
+### 递归问题 `Recursion`
 
 - 属于“自上而下”的解决问题，由大到小拆解问题递归三要素，终止条件、递归调用（子问题）、返回结果（归）
 - 当递归函数有返回值，子递归调用必须return，请注意这有别于终止条件的返回
@@ -23,7 +26,7 @@
 - 禁止状态变量的自增自减++--或者v=v+n或者v=v-n，即使v不是引用变量。因为会导致本来修改后的状态变量值按理是要传递给下一层递归的，结果在传递之前你把上一层（当前层）的状态变量也给修改了。正确的传参姿势是v+n/v-n直接塞给递归函数
 - 禁止定义局部变量，由于反复递归导致局部变量被反复初始化，最终局部变量将毫无意义
 
-回溯问题 `BackTracking`
+### 回溯问题 `BackTracking`
 
 In Example One, visiting each node starts a "trial". And passing a leaf node or the `return` statement to going back to the parent node suggests "retreat".
 
@@ -32,7 +35,7 @@ In Example One, visiting each node starts a "trial". And passing a leaf node or 
 - 剪枝prune，通过return提前返回程序剪掉下面的枝叶，属于优化性能的手段。要注意剪枝语句return和trial语句的相对位置，但当trial语句在return语句之前，return之前必须再次retreat，因为提前trial了节点信息。当trial语句在return语句之后，那就没必要在return之前二次retreat
 - 经典应用场景有二叉树dfs，全排列permutation，子集和subSetSum
 
-链表迭代 `Listnode`
+### 链表迭代 `Listnode`
 
 * 迭代 `iteration`属于“自下而上”的解决问题，由小到大解决问题
 * 表现形式 `for/while`
@@ -40,24 +43,24 @@ In Example One, visiting each node starts a "trial". And passing a leaf node or 
 * 双向链表
 * 循环链表
 
-二叉树 `TreeNode`
+### 二叉树 `TreeNode`
 
 * 递归：深度优先dfs递归遍历
 * 迭代：广度优先bfs层序遍历
 
-二叉搜索树 `BST`
+### 二叉搜索树 `BST`
 
 * 递归：中序遍历天然有序
 * 迭代：二分查找
 * 迭代：叶子插入（二分查找+叶子插入）
 * 迭代+递归：按出度 `0|1|2`删除算法
 
-字符串 `String`
+### 字符串 `String`
 
 1. 求字符 `charAt(index)`
 2. 求数值 `charAt(index)-'0'`
 
-双指针 `Point`
+### 双指针 `Point`
 
 * `while|if|continue|break`
 * 二分查找法
@@ -65,25 +68,27 @@ In Example One, visiting each node starts a "trial". And passing a leaf node or 
 * 滑动窗口法
 * 跨数组多指针
 
-哈希表 `Hashmap`
+### 哈希表 `Hashmap`
 
 * 查找
 * 缓存
 
-栈 `Stack`
+### 栈 `Stack`
 
 * `push/pop/peek`
 
-队列 `Queue`
+### 队列 `Queue`
 
 * `Queue`是顶级接口，实现类有 `LinkedList`，`PriorityQueue`
 * `offer/poll`
 
-动态规划 `Dynamic Programing`
+### 动态规划 `Dynamic Programing`
 
 * 推导转移方程并填充 `dp[]`数组
 
 ## 框架篇
+
+### 回溯框架
 
 回溯框架0：
 
@@ -257,10 +262,12 @@ Compared to the previous question,  **this question's input array may contain du
 - **Each array element can only be chosen once** . Fortunately, we can also use the variable `start` to meet this constraint: after making the choice xi, set the next round to start from index i+1 going forward.  [4,4],[4,4^],[4^,4],[4^,4^]->[4,4^],[4^,4]（纵向剪枝）
 - **Another, equal elements could be chosen, but we need to limit equal elements to being chosen only once per round** . The implementation is quite clever: since the array is sorted, equal elements are adjacent. This means that in a certain round of choices, if the current element is equal to its left-hand element, it means it has already been chosen, so skip the current element directly.[4,4^],[4^,4]->[4,4^]（横向剪枝）
 
-为什么 `i > start` 才能够判断同一层的重复项？当你在某一层开始遍历（比如 `start = 0`），你可能会遇到多个连续相同的元素。假设这些元素是从索引 `start` 开始的：
+为什么 `i > start` 才开始判断第四次剪枝？为什么 `choices[i] == choices[i - 1]`能够判断同一层的重复项？
 
-* 对于第一个元素（`i == start`），你总是会尝试将其加入到当前状态中，因为它代表了该层（俯瞰整个树结构的某一层）首次遇到该值的机会。**所以只要是在递归调用之前的程序代码都属于当前层，递归调用代码所在行说明准备进入下一层，递归调用之后的程序代码是回溯说明要返回上一层**
-* 如果接下来的元素与前一个相同（即 `choices[i] == choices[i - 1]`），并且 `i > start`，这表明你已经在当前层尝试过这个值了。因此，为了避免产生重复组合，你应该跳过这次尝试。
+当你在某一层开始遍历（比如 `start = 0`），你可能会遇到多个连续相同的元素。假设这些元素是从索引 `start` 开始的：
+
+* 对于第一个元素（`i == start`），你总是会尝试将其加入到当前状态中，因为它代表了该层（俯瞰整个树结构的某一层）首次遇到该值的机会。
+* **只要是在递归调用之前的程序代码都属于当前层，递归调用代码所在行说明准备进入下一层，递归调用之后的程序代码是回溯说明要返回上一层**。所以在递归语句之前执行 `choices[i] == choices[i - 1]`，并且 `i > start`，这表明你已经在当前层尝试过这个值了。因此，为了避免产生重复组合，你应该跳过这次尝试。
 
 ```java
 /* Backtracking algorithm: Subset Sum II */
