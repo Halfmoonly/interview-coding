@@ -318,3 +318,24 @@ List<List<Integer>> subsetSumII(int[] nums, int target) {
 ```
 
 ### 手写堆
+
+下面以大根堆为例手写堆的插入操作，取出操作，以及建堆操作。小根堆同理
+
+自底向上的方式建堆(Floyd算法)效率要高于默认的自顶向下建堆，方式如下
+
+- 从末尾节点的父节点 `parent(size() - 1)`开始逆序迭代节点，因为末尾节点的left和right必然大于size，无法下沉
+- 迭代执行节点下沉shiftDown，直到索引为0的节点下沉完成
+
+原因是自底向上建堆利用了完全二叉树的特性，大部分节点位于底层，下沉次数极小。数学证明自底向上建堆复杂度为线性On
+
+```java
+/* Constructor, build heap based on input list */
+MaxHeap(List<Integer> nums) {
+    // Add all list elements into the heap
+    maxHeap = new ArrayList<>(nums);
+    // Heapify all nodes except leaves
+    for (int i = parent(size() - 1); i >= 0; i--) {
+        siftDown(i);
+    }
+}
+```
